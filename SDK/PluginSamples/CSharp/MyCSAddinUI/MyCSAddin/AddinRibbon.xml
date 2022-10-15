@@ -3,8 +3,11 @@
     <ribbon>
         <tabs>
             <tab id="PS.Home" label="Home">
-                <group id="PS.Tab.Group.Preference.Settings.1" label="MyCSAddin Preference Settings">
-                    <button label="Preference" onAction="InvokePreferenceSettings" image="0" />
+                <group id="PS.Tab.Group.Preference.Settings.1" label="OneDrive">
+                    <button label="Upload" onAction="OneDriveUpload" image="0" />
+				    <button label="Download" onAction="OneDriveDownLoad" image="1" />
+				    <button label="Settings" onAction="OneDriveSettings" image="2" />
+				    <button label="About" onAction="OneDriveAbout" image="3" />
                 </group>
             </tab>
             <tab id="Sample.CS.Setup" label="MyCSAddin Setup" insertAfterQ="Basic Setup">
@@ -16,8 +19,8 @@
                   <item id="0" label="Select the Experiment Type" />
                   <item id="1" label="Experiment Group 1" />
                 </comboBox>
-              </group>
-            </tab>
+              </group>	
+			</tab>						
         </tabs>
     </ribbon>
 </customUI>

@@ -1,22 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32413.511
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCSAddin", "MyCSAddin\MyCSAddin.csproj", "{9C2EA237-2863-4A16-9D86-046C7ECECECB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		DebugS|Any CPU = DebugS|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9C2EA237-2863-4A16-9D86-046C7ECECECB}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{9C2EA237-2863-4A16-9D86-046C7ECECECB}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{9C2EA237-2863-4A16-9D86-046C7ECECECB}.DebugS|Any CPU.ActiveCfg = DebugS|Any CPU
 		{9C2EA237-2863-4A16-9D86-046C7ECECECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C2EA237-2863-4A16-9D86-046C7ECECECB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {183630AD-6100-4018-87D6-1A875E2E9B8A}
 	EndGlobalSection
 EndGlobal

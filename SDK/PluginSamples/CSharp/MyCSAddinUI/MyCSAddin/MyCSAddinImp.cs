@@ -32,7 +32,7 @@ namespace MyCSAddin
         public AddinSimulationManager m_pAddinSimulationManager; //Addin Simulation Manager
         public int m_lSessionID;
         public string m_ExperimentName;
-
+        public OneDriveSdkMan m_objSdkMan;
         #endregion
 
         #region Constructor
@@ -41,6 +41,7 @@ namespace MyCSAddin
             m_pAddinSimulationManager=new AddinSimulationManager(this); //Addin Simulation Manager
             m_lSessionID = -1;
             m_ExperimentName="";
+            m_objSdkMan = new OneDriveSdkMan();
         }
         #endregion
 
@@ -146,6 +147,7 @@ namespace MyCSAddin
             MessageBox.Show("C#.InvokePreferenceSettings");
         }
 
+       
         public void SetRibbonControlText(string ID, string Text)
         {
             (new RibbonToolbar()).SetControlText(ID, Text);
@@ -154,6 +156,33 @@ namespace MyCSAddin
         public void InvokeDefaultSettings()
         {
             MessageBox.Show("C#.InvokeDefaultSettings");
+        }
+        #endregion
+
+        #region One Drive
+        public void OneDriveUpload()
+        {
+            m_objSdkMan.OpenUploadWindow();
+
+        }
+
+        public void OneDriveDownLoad()
+        {
+            m_objSdkMan.OpenDownloadWindow();
+
+        }
+
+        public void OneDriveSettings()
+        {
+            m_objSdkMan.OpenSettingsWindow();
+
+        }
+
+
+        public void OneDriveAbout()
+        {
+            m_objSdkMan.OpenAboutWindow();
+
         }
         #endregion
 
@@ -233,6 +262,7 @@ namespace MyCSAddin
         }
 		public void OnAfterSaveDocument(string DocumentPath)
         {
+            m_objSdkMan.setFilePath(DocumentPath);
             
         }
         #endregion
