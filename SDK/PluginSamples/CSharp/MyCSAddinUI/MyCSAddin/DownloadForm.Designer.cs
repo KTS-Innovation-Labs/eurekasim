@@ -40,7 +40,10 @@ namespace MyCSAddin
             this.label1 = new System.Windows.Forms.Label();
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonDownload = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel_downLoad = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -68,7 +71,6 @@ namespace MyCSAddin
             this.checkBox_openfile.TabIndex = 6;
             this.checkBox_openfile.Text = "Open File After Download";
             this.checkBox_openfile.UseVisualStyleBackColor = true;
-           // this.checkBox_openfile.CheckedChanged += new System.EventHandler(this.checkBox_openfile_CheckedChanged);
             // 
             // button_downloadfilebrowse
             // 
@@ -148,11 +150,27 @@ namespace MyCSAddin
             this.buttonDownload.UseVisualStyleBackColor = false;
             this.buttonDownload.Click += new System.EventHandler(this.buttonDownload_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel_downLoad});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 161);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(564, 22);
+            this.statusStrip1.TabIndex = 7;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel_downLoad
+            // 
+            this.toolStripStatusLabel_downLoad.Name = "toolStripStatusLabel_downLoad";
+            this.toolStripStatusLabel_downLoad.Size = new System.Drawing.Size(0, 17);
+            // 
             // DownloadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(564, 158);
+            this.ClientSize = new System.Drawing.Size(564, 183);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonDownload);
@@ -162,10 +180,14 @@ namespace MyCSAddin
             this.Name = "DownloadForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OneDriveAddin | Download";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnFormClosing);
             this.Load += new System.EventHandler(this.DownloadForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -181,5 +203,7 @@ namespace MyCSAddin
         private System.Windows.Forms.TextBox textBox_downloadfile;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBox_openfile;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_downLoad;
     }
 }

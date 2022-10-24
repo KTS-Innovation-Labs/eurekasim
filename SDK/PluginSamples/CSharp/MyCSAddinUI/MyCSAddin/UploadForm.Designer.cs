@@ -39,7 +39,10 @@ namespace MyCSAddin
             this.label1 = new System.Windows.Forms.Label();
             this.buttonUpload = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
+            this.statusStrip_upload = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel_upload = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
+            this.statusStrip_upload.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -135,11 +138,27 @@ namespace MyCSAddin
             this.buttonClose.UseVisualStyleBackColor = false;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
+            // statusStrip_upload
+            // 
+            this.statusStrip_upload.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel_upload});
+            this.statusStrip_upload.Location = new System.Drawing.Point(0, 156);
+            this.statusStrip_upload.Name = "statusStrip_upload";
+            this.statusStrip_upload.Size = new System.Drawing.Size(539, 22);
+            this.statusStrip_upload.TabIndex = 3;
+            this.statusStrip_upload.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel_upload
+            // 
+            this.toolStripStatusLabel_upload.Name = "toolStripStatusLabel_upload";
+            this.toolStripStatusLabel_upload.Size = new System.Drawing.Size(0, 17);
+            // 
             // UploadForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(539, 149);
+            this.ClientSize = new System.Drawing.Size(539, 178);
+            this.Controls.Add(this.statusStrip_upload);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonUpload);
             this.Controls.Add(this.groupBox1);
@@ -153,7 +172,10 @@ namespace MyCSAddin
             this.Load += new System.EventHandler(this.UploadForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.statusStrip_upload.ResumeLayout(false);
+            this.statusStrip_upload.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -168,5 +190,7 @@ namespace MyCSAddin
         private System.Windows.Forms.Button button_UploadFileBrowse;
         private System.Windows.Forms.TextBox textBox_Uploadfile;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.StatusStrip statusStrip_upload;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_upload;
     }
 }

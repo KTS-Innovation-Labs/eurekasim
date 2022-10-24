@@ -80,7 +80,6 @@
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AddinSimulationManager.cs" />
-    <Compile Include="authConstants.cs" />
     <Compile Include="Authentication.cs" />
     <Compile Include="DownloadForm.cs">
       <SubType>Form</SubType>

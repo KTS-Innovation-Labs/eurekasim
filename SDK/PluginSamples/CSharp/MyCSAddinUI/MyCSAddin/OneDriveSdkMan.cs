@@ -15,32 +15,28 @@ namespace MyCSAddin
     public class OneDriveSdkMan
     {
         SettingsForm m_settingsForm;
-        UploadForm m_uploadForm;
         DownloadForm m_downloadForm;
-
+        UploadForm m_uploadForm;
+        public ObjectBrowserForm m_formObjectBrowserForm;
         public const string MsaClientId = "37274955-0b0a-4b94-91a6-b6762ebc7f4a";
         public const string MsaReturnUrl = "urn:ietf:wg:oauth:2.0:oob";
-
-        public ObjectBrowserForm m_formObjectBrowserForm;
+        public string m_strFilePath = string.Empty;
         private enum ClientType
         {
             Consumer,
             Business
         }
 
-        private const int UploadChunkSize = 10 * 1024 * 1024;       // 10 MB
         private GraphServiceClient graphClient { get; set; }
         private ClientType clientType { get; set; }
         public DriveItem CurrentFolder { get; set; }
-
-        public DriveItem SelectedItem { get; set; }
-        //public bool Autoupload;
+        public string strSelectedItem { get; set; }
         public OneDriveSdkMan()
         {
             m_formObjectBrowserForm = new ObjectBrowserForm(this);
             m_settingsForm = new SettingsForm(this);
-            m_uploadForm = new UploadForm(this);
             m_downloadForm = new DownloadForm(this);
+            m_uploadForm = new UploadForm(this);
             
         }
         public void OpenSettingsWindow()
@@ -57,8 +53,6 @@ namespace MyCSAddin
                 {
                     m_settingsForm.ShowDialog();
                 }
-
-
             }
             else
             {
@@ -76,14 +70,11 @@ namespace MyCSAddin
                 {
                     m_settingsForm.ShowDialog();
                 }
-
             }
             else
             {
                 m_downloadForm.ShowDialog();
             }
-
-
         }
         public void OpenAboutWindow()
         {
@@ -95,7 +86,6 @@ namespace MyCSAddin
         private async Task LoadFolderFromPath(string path = null)
         {
             if (null == this.graphClient) return;
-
 
             try
             {
@@ -194,10 +184,8 @@ namespace MyCSAddin
 
             try
             {
-                this.graphClient = null;
-                m_settingsForm.SetButtonText("Login");
                 Authentication.SignOut();
-
+                
             }
             catch (ServiceException exception)
             {
@@ -214,19 +202,26 @@ namespace MyCSAddin
             try
             {
                 this.graphClient = Authentication.GetAuthenticatedClient();
-                m_settingsForm.SetButtonText("Logout");
 
             }
             catch (ServiceException exception)
             {
 
                 PresentServiceException(exception);
-
+               
             }
             try
             {
                 await LoadFolderFromPath();
-                m_settingsForm.SetStatusText("Logged In");
+                if (Authentication.TokenForUser == null)
+                    m_settingsForm.SetStatusText("Unable To Login ");
+                else
+                {
+                    m_settingsForm.SetStatusText("Logged In");
+                    m_settingsForm.SetButtonText("Logout");
+                }
+                    
+
             }
             catch (ServiceException exception)
             {
@@ -263,7 +258,7 @@ namespace MyCSAddin
             }
             return strFolderPath;
         }
-        public string m_strFilePath = string.Empty;
+        
 
         public void setFilePath(string filePath)
         {
@@ -276,24 +271,20 @@ namespace MyCSAddin
             {
                 if (Properties.Settings.Default.AutoUpload)
                 {
-                    string strNewPath = CopytoTempFolder(filePath);
-                    MessageBox.Show("AutoUpload Mode Path "+ strNewPath);
-                    string originalFilename = System.IO.Path.GetFileName(strNewPath);
-                    Stream stream = new System.IO.FileStream(strNewPath, System.IO.FileMode.Open);
-                    string uploadFolder = Properties.Settings.Default.UploadFolder;
-                    FileUpload(stream, uploadFolder, originalFilename);
-                    //if (System.IO.File.Exists(strNewPath))
-                    //{
-                    //    System.IO.File.Delete(strNewPath);
-                    //}
+                    m_uploadForm.Show();
+                    //string strNewPath = CopytoTempFolder(filePath);
+                    //string originalFilename = System.IO.Path.GetFileName(strNewPath);
+                    //Stream stream = new System.IO.FileStream(strNewPath, System.IO.FileMode.Open);
+                    //string uploadFolder = Properties.Settings.Default.UploadFolder;
+                    //FileUpload(stream, uploadFolder, originalFilename);
 
                 }
             }
 
-            
+
         }
 
-        private string CopytoTempFolder(string filePath)
+        public string CopytoTempFolder(string filePath)
         {
             string strDestinationFile="";
             if (!System.IO.File.Exists(filePath))
@@ -310,21 +301,23 @@ namespace MyCSAddin
             using (var stream = file_stream)
             {
                 if (stream != null)
-                {;
+                {
                     var uploadPath = folderPath + "/" + Uri.EscapeUriString(System.IO.Path.GetFileName(filename));
 
                     try
                     {
-                        //MessageBox.Show(uploadPath);
                         var uploadedItem =
                             await this.graphClient.Drive.Root.ItemWithPath(uploadPath).Content.Request().PutAsync<DriveItem>(stream);
                         MessageBox.Show("Uploaded to OneDrive Folder Successfully", "EurekaSim OneDrive PlugIn");
+                        m_uploadForm.SetStatusText(" Successfully Uploaded ");
                         AddItemToFolderContents(uploadedItem);
+                       
                     }
                     catch (Exception exception)
                     {
-                       // MessageBox.Show(exception.ToString());
                         PresentServiceException(exception);
+                        m_uploadForm.SetStatusText("Unable To Upload");
+
                     }
                 }
             }
@@ -345,45 +338,28 @@ namespace MyCSAddin
         }
         public async void FileDownload(string filename)
         {
-            //var item = this.SelectedItem;
-            //// MessageBox.Show(SelectedItem.Name);
-            //if (null == item)
-            //{
-            //    MessageBox.Show("Nothing selected.");
-            //    return;
-            //}
-
-            //var dialog = new SaveFileDialog();
-            //dialog.FileName = item.Name;
+            
             string Filename = Path.GetFileName(filename);
             string path = m_downloadForm.path + "\\" +Filename;
-            
-            //dialog.Filter = "All Files (*.*)|*.*";
-            //var result = dialog.ShowDialog();
-            //if (result != System.Windows.Forms.DialogResult.OK)
-            //    return;
-            // textBox_downloadfile.Text = item.Name;
             try
             {
                
-                string item= Properties.Settings.Default.ItemId;
-               // MessageBox.Show(item);
-                using (var stream = await this.graphClient.Drive.Items[item].Content.Request().GetAsync())
-               
-
-                // MessageBox.Show(stream.Position.ToString());
+                using (var stream = await this.graphClient.Drive.Items[strSelectedItem].Content.Request().GetAsync())
+                    
                 using (var outputStream = new System.IO.FileStream(path, System.IO.FileMode.Create))
                     {
-                        await stream.CopyToAsync(outputStream);
+                    
+                    await stream.CopyToAsync(outputStream);
                         
                     }
                 MessageBox.Show("File Downloaded to "+ path + " Successfully","EurekaSim OneDrive PlugIn");
+                m_downloadForm.SetStatusText("Successfully Downloaded ...");
                 OpenDowloadedFile(path);
             }
             catch (Exception Ex)
             {
                 MessageBox.Show(Ex.Message);
-                
+                m_downloadForm.SetStatusText("Unable To Downloaded");
             }
            
         }
@@ -395,7 +371,7 @@ namespace MyCSAddin
             {
                 Thread.Sleep(1000);
                 new ApplicationDocument().OpenDocument(strFilePath);
-               // new ApplicationDocument().OpenDocument(@"C:\Users\Orchid\Desktop\EurekaSim.psl");
+               
             }
             catch (Exception)
             {

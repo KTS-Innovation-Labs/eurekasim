@@ -47,6 +47,11 @@ namespace MyCSAddin
             {
                 toolStripStatusLabel.Text = "Logging Out.......Please Wait........";
                 m_objSdkMan.SignOut();
+                if (Authentication.TokenForUser == null)
+                {
+                   SetButtonText("Login");
+                   SetStatusText("Logged Out");
+                }
             }
            
         }
@@ -121,5 +126,6 @@ namespace MyCSAddin
             textBoxUploadFolder.Text = Properties.Settings.Default.UploadFolder;
             checkBox1.Checked =  (bool)Properties.Settings.Default.AutoUpload;
         }
+
     }
 }

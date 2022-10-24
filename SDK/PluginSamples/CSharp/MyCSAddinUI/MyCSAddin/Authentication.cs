@@ -13,6 +13,7 @@ namespace MyCSAddin
     class Authentication
     {
         // The Client ID is used by the application to uniquely identify itself to the v2.0 authentication endpoint.
+
         static string clientId = OneDriveSdkMan.MsaClientId;
         public static string[] Scopes = { "Files.ReadWrite.All" };
 
@@ -40,8 +41,7 @@ namespace MyCSAddin
                             {
                                 var token = await GetTokenForUserAsync();
                                 requestMessage.Headers.Authorization = new AuthenticationHeaderValue("bearer", token);
-                                // This header has been added to identify our sample in the Microsoft Graph service.  If extracting this code for your project please remove.
-                                // requestMessage.Headers.Add("SampleID", "uwp-csharp-apibrowser-sample");
+                                // This header has been added to identify our sample in the Microsoft Graph service.  
                                 requestMessage.Headers.Add("SampleID", "EurekaSim-csharp-OneDrive-Addin");
 
                             }));
@@ -58,10 +58,9 @@ namespace MyCSAddin
         }
 
 
-        /// <summary>
-        /// Get Token for User.
-        /// </summary>
-        /// <returns>Token for user.</returns>
+        
+        // Get Token for User.
+        
         public static async Task<string> GetTokenForUserAsync()
         {
             AuthenticationResult authResult;
@@ -85,9 +84,9 @@ namespace MyCSAddin
             return TokenForUser;
         }
 
-        /// <summary>
-        /// Signs the user out of the service.
-        /// </summary>
+      
+        // Signs the user out of the service.
+       
         public static void SignOut()
         {
             foreach (var user in IdentityClientApp.Users)
