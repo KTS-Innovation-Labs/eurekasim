@@ -56,7 +56,20 @@ namespace MyCSAddin
             }
             else
             {
-                m_uploadForm.ShowDialog();
+                if (Properties.Settings.Default.AutoUpload) 
+                {
+                    if (m_strFilePath == string.Empty)
+                    {
+                        MessageBox.Show("Please Save the Current EurekaSim File Before Uploading....", "EurekaSim OneDrive Addin");
+                    }
+                    else
+                    {
+                        m_uploadForm.ShowDialog();
+                    }
+
+                }
+                else
+                    m_uploadForm.ShowDialog();
             }
         }
 

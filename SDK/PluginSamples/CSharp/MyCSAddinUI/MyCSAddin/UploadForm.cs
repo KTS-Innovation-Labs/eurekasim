@@ -34,21 +34,17 @@ namespace MyCSAddin
         private void UploadForm_Load(object sender, EventArgs e)
         {
             SetStatusText("");
-            textBox_Uploadfile.Text= null;
             textBoxUploadFilepath.Text = Properties.Settings.Default.UploadFolder;
-            if(m_objSdkMan.m_strFilePath==string.Empty)
-            {
-                if(Properties.Settings.Default.AutoUpload)
-                {
-                    MessageBox.Show("Please Save the Current EurekaSim File Before Uploading....", "EurekaSim OneDrive Addin");
-                }
-               
-            }
-            else
-            {
+             if(Properties.Settings.Default.AutoUpload)
+             {
+                    
                 textBox_Uploadfile.Text = m_objSdkMan.m_strFilePath;
                 stream1=new System.IO.FileStream(m_objSdkMan.m_strFilePath, System.IO.FileMode.Open);
                 
+             }
+            else
+            {
+                textBox_Uploadfile.Text = null;
             }
            
         }
