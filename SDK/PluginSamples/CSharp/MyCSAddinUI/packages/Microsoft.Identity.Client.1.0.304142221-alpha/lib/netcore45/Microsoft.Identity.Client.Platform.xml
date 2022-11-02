@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Identity.Client.Platform</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.Identity.Client.PublicClientApplicationExtensions.AcquireTokenWithIntegratedAuthAsync(Microsoft.Identity.Client.PublicClientApplication,System.String[])">
+            <summary>
+            .NET specific method for intergrated auth. To support Xamarin, we would need to move these to platform specific libraries.
+            </summary>
+            <param name="scope"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.PublicClientApplicationExtensions.AcquireTokenWithIntegratedAuthAsync(Microsoft.Identity.Client.PublicClientApplication,System.String[],System.String,System.String)">
+            <summary>
+            .NET specific method for intergrated auth. To support Xamarin, we would need to move these to platform specific libraries.
+            </summary>
+            <param name="scope"></param>
+            <param name="authority"></param>
+            <param name="policy"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Identity.Client.PlatformParameters">
+            <summary>
+            Additional parameters used in acquiring user's authorization
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.PlatformParameters.UseCorporateNetwork">
+            <summary>
+            Gets or Sets flag to enable logged in user authentication. Note that enabling this flag requires some extra application capabilites.
+            This flag only works in SSO mode and is ignored otherwise. To enable SSO mode, call AcquireTokenAsync with null or application's callback URI as redirectUri.
+            </summary>
+        </member>
+    </members>
+</doc>

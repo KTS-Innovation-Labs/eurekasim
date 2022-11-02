@@ -1,0 +1,1186 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Identity.Client</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Identity.Client.Internal.MsalError">
+            <summary>
+            Error code returned as a property in MsalException
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.Unknown">
+            <summary>
+            Unknown error.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.InvalidArgument">
+            <summary>
+            Invalid argument.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.AuthenticationFailed">
+            <summary>
+            Authentication failed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.NonHttpsRedirectNotSupported">
+            <summary>
+            Invalid credential type.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.AuthenticationCanceled">
+            <summary>
+            Authentication canceled.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.HttpRequestCancelled">
+            <summary>
+            Invalid credential type.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.UnauthorizedResponseExpected">
+            <summary>
+            Unauthorized response expected from resource server.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.AuthorityNotInValidList">
+            <summary>
+            'authority' is not in the list of valid addresses.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.AuthorityValidationFailed">
+            <summary>
+            Authority validation failed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.AssemblyLoadFailed">
+            <summary>
+            Loading required assembly failed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.AssemblyNotFound">
+            <summary>
+            Assembly not found.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.InvalidOwnerWindowType">
+            <summary>
+            Invalid owner window type.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.MultipleTokensMatched">
+            <summary>
+            MultipleTokensMatched were matched.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.InvalidCacheOperation">
+            <summary>
+            Invalid cache operation was attempted.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.InvalidAuthorityType">
+            <summary>
+            Invalid authority type.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.InvalidCredentialType">
+            <summary>
+            Invalid credential type.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.InvalidServiceUrl">
+            <summary>
+            Invalid service URL.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.FailedToAcquireTokenSilently">
+            <summary>
+            failed_to_acquire_token_silently.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.CertificateKeySizeTooSmall">
+            <summary>
+            Certificate key size too small.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.IdentityProtocolLoginUrlNull">
+            <summary>
+            Identity protocol login URL Null.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.IdentityProtocolMismatch">
+            <summary>
+            Identity protocol mismatch.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.EmailAddressSuffixMismatch">
+            <summary>
+            Email address suffix mismatch.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.IdentityProviderRequestFailed">
+            <summary>
+            Identity provider request failed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.StsTokenRequestFailed">
+            <summary>
+            STS token request failed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.EncodedTokenTooLong">
+            <summary>
+            Encoded token too long.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.ServiceUnavailable">
+            <summary>
+            Service unavailable.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.ServiceReturnedError">
+            <summary>
+            Service returned error.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.FederatedServiceReturnedError">
+            <summary>
+            Federated service returned error.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.StsMetadataRequestFailed">
+            <summary>
+            STS metadata request failed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.NoDataFromSts">
+            <summary>
+            No data from STS.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.UserMismatch">
+            <summary>
+            User Mismatch.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.UnsupportedUserType">
+            <summary>
+            Unknown User Type.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.UnknownUser">
+            <summary>
+            Unknown User.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.UserRealmDiscoveryFailed">
+            <summary>
+            User Realm Discovery Failed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.AccessingWsMetadataExchangeFailed">
+            <summary>
+            Accessing WS Metadata Exchange Failed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.ParsingWsMetadataExchangeFailed">
+            <summary>
+            Parsing WS Metadata Exchange Failed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.WsTrustEndpointNotFoundInMetadataDocument">
+            <summary>
+            WS-Trust Endpoint Not Found in Metadata Document.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.ParsingWsTrustResponseFailed">
+            <summary>
+            Parsing WS-Trust Response Failed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.NetworkNotAvailable">
+            <summary>
+            The request could not be preformed because the network is down.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.AuthenticationUiFailed">
+            <summary>
+            The request could not be preformed because of an unknown failure in the UI flow.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.UserInteractionRequired">
+            <summary>
+            One of two conditions was encountered.
+            1. The PromptBehavior.Never flag was passed and but the constraint could not be honored 
+               because user interaction was required.
+            2. An error occurred during a silent web authentication that prevented the authentication
+               flow from completing in a short enough time frame.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.PasswordRequiredForManagedUserError">
+            <summary>
+            Password is required for managed user.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.GetUserNameFailed">
+            <summary>
+            Failed to get user name.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.MissingFederationMetadataUrl">
+            <summary>
+            Federation Metadata Url is missing for federated user.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.FailedToRefreshToken">
+            <summary>
+            Failed to refresh token.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.IntegratedAuthFailed">
+            <summary>
+            Integrated authentication failed. You may try an alternative authentication method.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.DuplicateQueryParameter">
+            <summary>
+            Duplicate query parameter in extraQueryParameters
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.BrokerReponseHashMismatch">
+            <summary>
+            Broker response hash did not match
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalError.DeviceCertificateNotFound">
+            <summary>
+            Device certificate not found.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalIdParameter.Product">
+            <summary>
+            ADAL Flavor: .NET or WinRT
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalIdParameter.Version">
+            <summary>
+            ADAL assembly version
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalIdParameter.CpuPlatform">
+            <summary>
+            CPU platform with x86, x64 or ARM as value
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalIdParameter.OS">
+            <summary>
+            Version of the operating system. This will not be sent on WinRT
+            </summary>
+        </member>
+        <member name="F:Microsoft.Identity.Client.Internal.MsalIdParameter.DeviceModel">
+            <summary>
+            Device model. This will not be sent on .NET
+            </summary>
+        </member>
+        <member name="T:Microsoft.Identity.Client.Internal.MsalIdHelper">
+            <summary>
+            This class adds additional query parameters or headers to the requests sent to STS. This can help us in
+            collecting statistics and potentially on diagnostics.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Identity.Client.Internal.MsalErrorMessage">
+            <summary>
+            The active directory authentication error message.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.Internal.AuthenticationResultEx.RefreshToken">
+            <summary>
+            Gets the Refresh Token associated with the requested Access Token. Note: not all operations will return a Refresh Token.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.Internal.AuthenticationResultEx.IsMultipleScopeRefreshToken">
+            <summary>
+            Gets a value indicating whether the refresh token can be used for requesting access token for other resources.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.Internal.AuthenticationResultEx.Deserialize(System.String)">
+            <summary>
+            Serializes the object to a JSON string
+            </summary>
+            <returns>Deserialized authentication result</returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.Internal.AuthenticationResultEx.Serialize">
+            <summary>
+            Serializes the object to a JSON string
+            </summary>
+            <returns>Serialized authentication result</returns>
+        </member>
+        <member name="T:Microsoft.Identity.Client.Internal.EncodingHelper">
+            <summary>
+            The encoding helper.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Identity.Client.Internal.TokenCacheKey">
+            <summary>
+            <see cref="T:Microsoft.Identity.Client.Internal.TokenCacheKey"/> can be used with Linq to access items from the TokenCache dictionary.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.Internal.TokenCacheKey.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.Internal.TokenCacheKey.Equals(System.Object)">
+            <summary>
+            Determines whether the specified object is equal to the current object.
+            </summary>
+            <returns>
+            true if the specified object is equal to the current object; otherwise, false.
+            </returns>
+            <param name="obj">The object to compare with the current object. </param><filterpriority>2</filterpriority>
+        </member>
+        <member name="M:Microsoft.Identity.Client.Internal.TokenCacheKey.Equals(Microsoft.Identity.Client.Internal.TokenCacheKey)">
+            <summary>
+            Determines whether the specified TokenCacheKey is equal to the current object.
+            </summary>
+            <returns>
+            true if the specified TokenCacheKey is equal to the current object; otherwise, false.
+            </returns>
+            <param name="other">The TokenCacheKey to compare with the current object. </param><filterpriority>2</filterpriority>
+        </member>
+        <member name="M:Microsoft.Identity.Client.Internal.TokenCacheKey.GetHashCode">
+            <summary>
+            Returns the hash code for this TokenCacheKey.
+            </summary>
+            <returns>
+            A 32-bit signed integer hash code.
+            </returns>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AbstractClientApplication.RestrictToSingleUser">
+            <summary>
+            default false.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AbstractClientApplication.ClientId">
+            <summary>
+            Will be a default value. Can be overriden by the developer. Once set, application will bind to the client Id.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AbstractClientApplication.RedirectUri">
+            <summary>
+            Redirect Uri configured in the portal. Will have a default value. Not required, if the developer is using the default client Id.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AbstractClientApplication.CorrelationId">
+            <summary>
+            Gets or sets correlation Id which would be sent to the service with the next request. 
+            Correlation Id is to be used for diagnostics purposes. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AbstractClientApplication.ValidateAuthority">
+            <summary>
+            Gets a value indicating whether address validation is ON or OFF.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AbstractClientApplication.PlatformParameters">
+            <summary>
+            .NET specific property that allows configuration of platform specific properties. For example, in iOS/Android it would include the flag to enable/disable broker.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AbstractClientApplication.Users">
+            <summary>
+            Returns a User centric view over the cache that provides a list of all the signed in users.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.AbstractClientApplication.AcquireTokenSilentAsync(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="scope"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.AbstractClientApplication.AcquireTokenSilentAsync(System.String[],Microsoft.Identity.Client.User)">
+            <summary>
+            
+            </summary>
+            <param name="scope"></param>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.AbstractClientApplication.AcquireTokenSilentAsync(System.String[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="scope"></param>
+            <param name="userIdentifier"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.AbstractClientApplication.AcquireTokenSilentAsync(System.String[],System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="scope"></param>
+            <param name="userIdentifier"></param>
+            <param name="authority"></param>
+            <param name="policy"></param>
+            <param name="forceRefresh"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.AbstractClientApplication.AcquireTokenSilentAsync(System.String[],Microsoft.Identity.Client.User,System.String,System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="scope"></param>
+            <param name="user"></param>
+            <param name="authority"></param>
+            <param name="policy"></param>
+            <param name="forceRefresh"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Identity.Client.LogLevel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Identity.Client.IMsalLogCallback">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Identity.Client.LoggerCallbackHandler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.LoggerCallbackHandler.Callback">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Microsoft.Identity.Client.MsalException">
+            <summary>
+            The exception type thrown when an error occurs during token acquisition.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.MsalException.#ctor">
+            <summary>
+             Initializes a new instance of the exception class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.MsalException.#ctor(System.String)">
+            <summary>
+             Initializes a new instance of the exception class with a specified
+             error code.
+            </summary>
+            <param name="errorCode">The error code returned by the service or generated by client. This is the code you can rely on for exception handling.</param>
+        </member>
+        <member name="M:Microsoft.Identity.Client.MsalException.#ctor(System.String,System.String)">
+            <summary>
+             Initializes a new instance of the exception class with a specified
+             error code and error message.
+            </summary>
+            <param name="errorCode">The error code returned by the service or generated by client. This is the code you can rely on for exception handling.</param>
+            <param name="message">The error message that explains the reason for the exception.</param>
+        </member>
+        <member name="M:Microsoft.Identity.Client.MsalException.#ctor(System.String,System.Exception)">
+            <summary>
+             Initializes a new instance of the exception class with a specified
+             error code and a reference to the inner exception that is the cause of
+             this exception.
+            </summary>
+            <param name="errorCode">The error code returned by the service or generated by client. This is the code you can rely on for exception handling.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified. It may especially contain the actual error message returned by the service.</param>
+        </member>
+        <member name="M:Microsoft.Identity.Client.MsalException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+             Initializes a new instance of the exception class with a specified
+             error code, error message and a reference to the inner exception that is the cause of
+             this exception.
+            </summary>
+            <param name="errorCode">The error code returned by the service or generated by client. This is the code you can rely on for exception handling.</param>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified. It may especially contain the actual error message returned by the service.</param>
+        </member>
+        <member name="P:Microsoft.Identity.Client.MsalException.ErrorCode">
+            <summary>
+            Gets the protocol error code returned by the service or generated by client. This is the code you can rely on for exception handling.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.MsalException.ToString">
+            <summary>
+            Creates and returns a string representation of the current exception.
+            </summary>
+            <returns>A string representation of the current exception.</returns>
+        </member>
+        <member name="T:Microsoft.Identity.Client.MsalServiceException">
+            <summary>
+            The exception type thrown when user returned by service does not match user in the request.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.MsalServiceException.#ctor(System.String,System.String)">
+            <summary>
+             Initializes a new instance of the exception class with a specified
+             error code and error message.
+            </summary>
+            <param name="errorCode">The protocol error code returned by the service or generated by client. This is the code you can rely on for exception handling.</param>
+            <param name="message">The error message that explains the reason for the exception.</param>
+        </member>
+        <member name="M:Microsoft.Identity.Client.MsalServiceException.#ctor(System.String,System.Exception)">
+            <summary>
+             Initializes a new instance of the exception class with a specified
+             error code and a reference to the inner exception that is the cause of
+             this exception.
+            </summary>
+            <param name="errorCode">The protocol error code returned by the service or generated by client. This is the code you can rely on for exception handling.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified. It may especially contain the actual error message returned by the service.</param>
+        </member>
+        <member name="M:Microsoft.Identity.Client.MsalServiceException.#ctor(System.String,System.String,System.String[],System.Exception)">
+            <summary>
+             Initializes a new instance of the exception class with a specified
+             error code, error message and a reference to the inner exception that is the cause of
+             this exception.
+            </summary>
+            <param name="errorCode">The protocol error code returned by the service or generated by client. This is the code you can rely on for exception handling.</param>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="serviceErrorCodes">The specific error codes that may be returned by the service.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified. It may especially contain the actual error message returned by the service.</param>
+        </member>
+        <member name="P:Microsoft.Identity.Client.MsalServiceException.StatusCode">
+            <summary>
+            Gets the status code returned from http layer. This status code is either the HttpStatusCode in the inner HttpRequestException response or
+            NavigateError Event Status Code in browser based flow (See http://msdn.microsoft.com/en-us/library/bb268233(v=vs.85).aspx).
+            You can use this code for purposes such as implementing retry logic or error investigation.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.MsalServiceException.ServiceErrorCodes">
+            <summary>
+            Gets the specific error codes that may be returned by the service.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.MsalServiceException.ToString">
+            <summary>
+            Creates and returns a string representation of the current exception.
+            </summary>
+            <returns>A string representation of the current exception.</returns>
+        </member>
+        <member name="T:Microsoft.Identity.Client.MsalSilentTokenAcquisitionException">
+            <summary>
+            The exception type thrown when a token cannot be acquired silently.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.MsalSilentTokenAcquisitionException.#ctor">
+            <summary>
+             Initializes a new instance of the exception class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.MsalSilentTokenAcquisitionException.#ctor(System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="T:Microsoft.Identity.Client.MsalUserMismatchException">
+            <summary>
+            The exception type thrown when user returned by service does not match user in the request.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.MsalUserMismatchException.#ctor(System.String,System.String)">
+            <summary>
+             Initializes a new instance of the exception class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.MsalUserMismatchException.RequestedUser">
+            <summary>
+            Gets the user requested from service.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.MsalUserMismatchException.ReturnedUser">
+            <summary>
+            Gets the user returned by service.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.MsalUserMismatchException.ToString">
+            <summary>
+            Creates and returns a string representation of the current exception.
+            </summary>
+            <returns>A string representation of the current exception.</returns>
+        </member>
+        <member name="T:Microsoft.Identity.Client.AuthenticationParameters">
+            <summary>
+            Contains authentication parameters based on unauthorized response from resource server.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AuthenticationParameters.Authority">
+            <summary>
+            Gets or sets the address of the authority to issue token.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AuthenticationParameters.Resource">
+            <summary>
+            Gets or sets the identifier of the target resource that is the recipient of the requested token.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.AuthenticationParameters.CreateFromResourceUrlAsync(System.Uri)">
+            <summary>
+            Creates authentication parameters from address of the resource. This method expects the resource server to return unauthorized response
+            with WWW-Authenticate header containing authentication parameters.
+            </summary>
+            <param name="resourceUrl">Address of the resource</param>
+            <returns>AuthenticationParameters object containing authentication parameters</returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.AuthenticationParameters.CreateFromUnauthorizedResponseAsync(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Creates authentication parameters from the response received from the response received from the resource. This method expects the response to have unauthorized status and
+            WWW-Authenticate header containing authentication parameters.</summary>
+            <param name="responseMessage">Response received from the resource (e.g. via an http call using HttpClient).</param>
+            <returns>AuthenticationParameters object containing authentication parameters</returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.AuthenticationParameters.CreateFromResponseAuthenticateHeader(System.String)">
+            <summary>
+            Creates authentication parameters from the WWW-Authenticate header in response received from resource. This method expects the header to contain authentication parameters.
+            </summary>
+            <param name="authenticateHeader">Content of header WWW-Authenticate header</param>
+            <returns>AuthenticationParameters object containing authentication parameters</returns>
+        </member>
+        <member name="T:Microsoft.Identity.Client.AuthenticationResult">
+            <summary>
+            Contains the results of one token acquisition operation. 
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.AuthenticationResult.#ctor(System.String,System.String,System.DateTimeOffset)">
+            <summary>
+            Creates result returned from AcquireToken. Except in advanced scenarios related to token caching, you do not need to create any instance of AuthenticationResult.
+            </summary>
+            <param name="tokenType">Type of the Token returned</param>
+            <param name="token">The Token requested</param>
+            <param name="expiresOn">The point in time in which the Access Token returned in the Token property ceases to be valid</param>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AuthenticationResult.TokenType">
+            <summary>
+            Gets the type of the Token returned. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AuthenticationResult.Token">
+            <summary>
+            Gets the Access Token requested.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AuthenticationResult.ExpiresOn">
+            <summary>
+            Gets the point in time in which the Access Token returned in the Token property ceases to be valid.
+            This value is calculated based on current UTC time measured locally and the value expiresIn received from the service.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AuthenticationResult.TenantId">
+            <summary>
+            Gets an identifier for the tenant the token was acquired from. This property will be null if tenant information is not returned by the service.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AuthenticationResult.FamilyId">
+            <summary>
+            Gets an identifier for the family the token was acquired from. This property will be null if tenant information is not returned by the service.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AuthenticationResult.User">
+            <summary>
+            Gets otherUser information including otherUser Id. Some elements in User might be null if not returned by the service.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AuthenticationResult.IdToken">
+            <summary>
+            Gets the entire Id Token if returned by the service or null if no Id Token is returned.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AuthenticationResult.Scope">
+            <summary>
+            Gets the scope values returned from the service.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.AuthenticationResult.ScopeSet">
+            <summary>
+            Gets the scope values returned from the service.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.AuthenticationResult.CreateAuthorizationHeader">
+            <summary>
+            Creates authorization header from authentication result.
+            </summary>
+            <returns>Created authorization header</returns>
+        </member>
+        <member name="T:Microsoft.Identity.Client.ClientAssertion">
+            <summary>
+            Secret type containing an assertion of type "urn:ietf:params:oauth:token-type:jwt".
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.ClientAssertion.#ctor(System.String)">
+            <summary>
+            Constructor to create credential with a jwt token encoded as a base64 url encoded string.
+            </summary>
+            <param name="assertion">The jwt used as credential.</param>
+        </member>
+        <member name="P:Microsoft.Identity.Client.ClientAssertion.Assertion">
+            <summary>
+            Gets the assertion.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.ClientAssertion.AssertionType">
+            <summary>
+            Gets the assertion type.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Identity.Client.ClientCredential">
+            <summary>
+            Secret including client id and secret.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.ClientCredential.#ctor(Microsoft.Identity.Client.IClientAssertionCertificate)">
+            <summary>
+            Constructor to create Secret with client id and secret
+            </summary>
+            <param name="credential">Secret of the client requesting the token.</param>
+        </member>
+        <member name="M:Microsoft.Identity.Client.ClientCredential.#ctor(System.String)">
+            <summary>
+            Constructor to create Secret with client id and secret
+            </summary>
+            <param name="secret">Secret of the client requesting the token.</param>
+        </member>
+        <member name="P:Microsoft.Identity.Client.ConfidentialClientApplication.ClientCredential">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.ConfidentialClientApplication.#ctor(System.String,System.String,Microsoft.Identity.Client.ClientCredential,Microsoft.Identity.Client.TokenCache)">
+            <summary>
+            
+            </summary>
+            <param name="clientId"></param>
+            <param name="redirectUri"></param>
+            <param name="clientCredential"></param>
+        </member>
+        <member name="M:Microsoft.Identity.Client.ConfidentialClientApplication.#ctor(System.String,System.String,System.String,Microsoft.Identity.Client.ClientCredential,Microsoft.Identity.Client.TokenCache)">
+            <summary>
+            
+            </summary>
+            <param name="authority"></param>
+            <param name="clientId"></param>
+            <param name="redirectUri"></param>
+            <param name="clientCredential"></param>
+        </member>
+        <member name="M:Microsoft.Identity.Client.ConfidentialClientApplication.GetAuthorizationRequestUrlAsync(System.String[],System.String,System.String)">
+            <summary>
+            Gets URL of the authorize endpoint including the query parameters.
+            </summary>
+            <param name="scope"></param>
+            <param name="loginHint"></param>
+            <param name="extraQueryParameters"></param>
+            <returns>URL of the authorize endpoint including the query parameters.</returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.ConfidentialClientApplication.GetAuthorizationRequestUrlAsync(System.String[],System.String,System.String,System.String,System.String[],System.String,System.String)">
+            <summary>
+            Gets URL of the authorize endpoint including the query parameters.
+            </summary>
+            <param name="scope"></param>
+            <param name="redirectUri"></param>
+            <param name="loginHint"></param>
+            <param name="extraQueryParameters"></param>
+            <param name="additionalScope"></param>
+            <param name="authority"></param>
+            <param name="policy"></param>
+            <returns>URL of the authorize endpoint including the query parameters.</returns>
+        </member>
+        <member name="T:Microsoft.Identity.Client.PublicClientApplication">
+            <summary>
+            Native applications (desktop/phone/iOS/Android).
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.PublicClientApplication.AcquireTokenAsync(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="scope"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.PublicClientApplication.AcquireTokenAsync(System.String[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="scope"></param>
+            <param name="loginHint"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.PublicClientApplication.AcquireTokenAsync(System.String[],System.String,Microsoft.Identity.Client.UiOptions,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="scope"></param>
+            <param name="loginHint"></param>
+            <param name="extraQueryParameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.PublicClientApplication.AcquireTokenAsync(System.String[],Microsoft.Identity.Client.User,Microsoft.Identity.Client.UiOptions,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="scope"></param>
+            <param name="user"></param>
+            <param name="options"></param>
+            <param name="extraQueryParameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.PublicClientApplication.AcquireTokenAsync(System.String[],System.String,Microsoft.Identity.Client.UiOptions,System.String,System.String[],System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="scope"></param>
+            <param name="loginHint"></param>
+            <param name="extraQueryParameters"></param>
+            <param name="options"></param>
+            <param name="additionalScope"></param>
+            <param name="authority"></param>
+            <param name="policy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.PublicClientApplication.AcquireTokenAsync(System.String[],Microsoft.Identity.Client.User,Microsoft.Identity.Client.UiOptions,System.String,System.String[],System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="scope"></param>
+            <param name="user"></param>
+            <param name="options"></param>
+            <param name="extraQueryParameters"></param>
+            <param name="additionalScope"></param>
+            <param name="authority"></param>
+            <param name="policy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.PublicClientApplication.AcquireTokenWithIntegratedAuthInternalAsync(System.String[])">
+            <summary>
+            .NET specific method for intergrated auth. To support Xamarin, we would need to move these to platform specific libraries.
+            </summary>
+            <param name="scope"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.PublicClientApplication.AcquireTokenWithIntegratedAuthInternalAsync(System.String[],System.String,System.String)">
+            <summary>
+            .NET specific method for intergrated auth.
+            </summary>
+            <param name="scope"></param>
+            <param name="authority"></param>
+            <param name="policy"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Microsoft.Identity.Client.TokenCache">
+            <summary>
+                accessToken cache class used by <see cref="!:AuthenticationContext" /> to store access and refresh tokens.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Identity.Client.TokenCache.TokenCacheNotification">
+            <summary>
+                Notification for certain token cache interactions during token acquisition.
+            </summary>
+            <param name="args">Arguments related to the cache item impacted</param>
+        </member>
+        <member name="M:Microsoft.Identity.Client.TokenCache.#ctor">
+            <summary>
+                Default constructor.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.TokenCache.#ctor(System.Byte[])">
+            <summary>
+                Constructor receiving state of the cache
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCache.DefaultSharedUserTokenCache">
+            <summary>
+                Static user token cache shared by all instances of application which do not explicitly pass a cache instance
+                during construction.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCache.DefaultSharedAppTokenCache">
+            <summary>
+                Static client token cache shared by all instances of ConfidentialClientApplication which do not explicitly pass a cache instance
+                during construction.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCache.BeforeAccess">
+            <summary>
+                Notification method called before any library method accesses the cache.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCache.BeforeWrite">
+            <summary>
+                Notification method called before any library method writes to the cache. This notification can be used to reload
+                the cache state from a row in database and lock that row. That database row can then be unlocked in
+                <see cref="P:Microsoft.Identity.Client.TokenCache.AfterAccess" /> notification.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCache.AfterAccess">
+            <summary>
+                Notification method called after any library method accesses the cache.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCache.HasStateChanged">
+            <summary>
+                Gets or sets the flag indicating whether cache state has changed. ADAL methods set this flag after any change.
+                Caller application should reset
+                the flag after serializing and persisting the state of the cache.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCache.Count">
+            <summary>
+                Gets the nunmber of items in the cache.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.TokenCache.Serialize">
+            <summary>
+                Serializes current state of the cache as a blob. Caller application can persist the blob and update the state of
+                the cache later by
+                passing that blob back in constructor or by calling method Deserialize.
+            </summary>
+            <returns>Current state of the cache as a blob</returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.TokenCache.Deserialize(System.Byte[])">
+            <summary>
+                Deserializes state of the cache. The state should be the blob received earlier by calling the method Serialize.
+            </summary>
+            <param name="state">State of the cache as a blob</param>
+        </member>
+        <member name="M:Microsoft.Identity.Client.TokenCache.ReadItems(System.String)">
+            <summary>
+                Reads a copy of the list of all items in the cache.
+            </summary>
+            <returns>The items in the cache</returns>
+        </member>
+        <member name="M:Microsoft.Identity.Client.TokenCache.DeleteItem(Microsoft.Identity.Client.TokenCacheItem)">
+            <summary>
+                Deletes an item from the cache.
+            </summary>
+            <param name="item">The item to delete from the cache</param>
+        </member>
+        <member name="M:Microsoft.Identity.Client.TokenCache.Clear(System.String)">
+            <summary>
+                Clears the cache by deleting all the items. Note that if the cache is the default shared cache, clearing it would
+                impact all the instances of <see cref="T:Microsoft.Identity.Client.PublicClientApplication" /> which share that cache.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.TokenCache.QueryCache(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+                Queries all values in the cache that meet the passed in values, plus the
+                authority value that this AuthorizationContext was created with.  In every case passing
+                null results in a wildcard evaluation.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Identity.Client.TokenCacheItem">
+            <summary>
+                Token cache item
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.TokenCacheItem.#ctor(Microsoft.Identity.Client.Internal.TokenCacheKey,Microsoft.Identity.Client.AuthenticationResult)">
+            <summary>
+                Default constructor.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheItem.Authority">
+            <summary>
+                Gets the Authority.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheItem.ClientId">
+            <summary>
+                Gets the ClientId.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheItem.ExpiresOn">
+            <summary>
+                Gets the Expiration.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheItem.FamilyName">
+            <summary>
+                Gets the Version.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheItem.Name">
+            <summary>
+                Gets the Name.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheItem.IdentityProvider">
+            <summary>
+                Gets the IdentityProviderName.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheItem.Scope">
+            <summary>
+                Gets the Scope.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheItem.Policy">
+            <summary>
+                Gets the Policy.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheItem.TenantId">
+            <summary>
+                Gets the TenantId.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheItem.UniqueId">
+            <summary>
+                Gets the user's unique Id.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheItem.DisplayableId">
+            <summary>
+                Gets the user's displayable Id.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheItem.Token">
+            <summary>
+                Gets the Access Token requested.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheItem.User">
+            <summary>
+                Gets the entire Profile Info if returned by the service or null if no Id Token is returned.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Identity.Client.TokenCacheNotificationArgs">
+            <summary>
+            Contains parameters used by the ADAL call accessing the cache.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheNotificationArgs.TokenCache">
+            <summary>
+            Gets the TokenCache
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheNotificationArgs.ClientId">
+            <summary>
+            Gets the ClientId.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheNotificationArgs.Scope">
+            <summary>
+            Gets the Scope.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheNotificationArgs.User">
+            <summary>
+            Gets the user's unique Id.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.TokenCacheNotificationArgs.Policy">
+            <summary>
+            Gets the policy.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Identity.Client.UserAssertion">
+            <summary>
+            Credential type containing an assertion representing user credential.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.UserAssertion.#ctor(System.String)">
+            <summary>
+            Constructor to create the object with an assertion. This constructor can be used for On Behalf Of flow which assumes the
+            assertion is a JWT token. For other flows, the other construction with assertionType must be used.
+            </summary>
+            <param name="assertion">Assertion representing the user.</param>
+        </member>
+        <member name="M:Microsoft.Identity.Client.UserAssertion.#ctor(System.String,System.String)">
+            <summary>
+            Constructor to create credential with client id, assertion and assertionType
+            </summary>
+            <param name="assertion">Assertion representing the user.</param>
+            <param name="assertionType">Type of the assertion representing the user.</param>
+        </member>
+        <member name="M:Microsoft.Identity.Client.UserAssertion.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor to create credential with client id, assertion, assertionType and userId
+            </summary>
+            <param name="assertion">Assertion representing the user.</param>
+            <param name="assertionType">Type of the assertion representing the user.</param>
+            <param name="userName">Identity of the user token is requested for. This parameter can be null.</param>
+        </member>
+        <member name="P:Microsoft.Identity.Client.UserAssertion.Assertion">
+            <summary>
+            Gets the assertion.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.UserAssertion.AssertionType">
+            <summary>
+            Gets the assertion type.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.UserAssertion.UserName">
+            <summary>
+            Gets name of the user.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Identity.Client.UserCredential">
+            <summary>
+            Credential used for integrated authentication on domain-joined machines.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.UserCredential.#ctor">
+            <summary>
+            Constructor to create user credential. Using this constructor would imply integrated authentication with logged in user
+            and it can only be used in domain joined scenarios.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.UserCredential.#ctor(System.String)">
+            <summary>
+            Constructor to create credential with client id and secret
+            </summary>
+            <param name="userName">Identifier of the user application requests token on behalf.</param>
+        </member>
+        <member name="P:Microsoft.Identity.Client.UserCredential.UserName">
+            <summary>
+            Gets identifier of the user.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Identity.Client.User">
+            <summary>
+            Contains information of a single user. This information is used for token cache lookup. Also if created with userId, userId is sent to the service when login_hint is accepted.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.User.UniqueId">
+            <summary>
+            Gets identifier of the user authenticated during token acquisition. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.User.DisplayableId">
+            <summary>
+            Gets a displayable value in UserPrincipalName (UPN) format. The value can be null.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.User.Name">
+            <summary>
+            Gets given name of the user if provided by the service. If not, the value is null. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.User.IdentityProvider">
+            <summary>
+            Gets identity provider if returned by the service. If not, the value is null. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.User.ClientId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.User.Authority">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Microsoft.Identity.Client.User.SignOut">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

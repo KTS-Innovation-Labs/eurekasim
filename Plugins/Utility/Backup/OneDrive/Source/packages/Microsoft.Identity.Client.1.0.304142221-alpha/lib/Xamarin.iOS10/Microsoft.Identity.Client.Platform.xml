@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Identity.Client.Platform</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Identity.Client.PlatformParameters">
+            <summary>
+            Additional parameters used in acquiring user's authorization
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.PlatformParameters.CallerViewController">
+            <summary>
+            Caller UIViewController
+            </summary>
+        </member>
+    </members>
+</doc>
