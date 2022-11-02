@@ -12,7 +12,7 @@
 	============
 
 	
-	1 . Open OneDrivePlugin.exe. 
+	1 . Open OneDrivePlugin.exe.It will ask to install .NET 4.6 or above if not installed.
 
 	2 . Accept the license agreement. Click next.
 
@@ -20,8 +20,6 @@
 
 	4 .Select between full installation and compact installation. Click next.
 	
-	5 .It will ask to install .NET 4.6 or above if not installed.
+	5 .Now setup is  ready to install EurekaSim OneDrive Plugin. Click 'Install' and then 'Finish' to complete the installation.
 
-	6 .Now setup is  ready to install EurekaSim OneDrive Plugin. Click 'Install' and then 'Finish' to complete the installation.
-
-	7. Installation video: 
+	6. Installation video: 
