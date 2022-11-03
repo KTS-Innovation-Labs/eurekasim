@@ -22,4 +22,4 @@
 	
 	5 .Now setup is  ready to install EurekaSim OneDrive Plugin. Click 'Install' and then 'Finish' to complete the installation.
 
-	6. Installation video: 
+	6. Installation video: https://youtu.be/f6__uRlj4Mk
