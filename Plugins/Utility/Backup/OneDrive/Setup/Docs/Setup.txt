@@ -1,0 +1,25 @@
+********************************************EUREKASIM ONEDRIVE PLUGIN SETUP USAGE**********************************************
+
+
+
+	Prerequisites
+	=============
+
+	.Net 4.6 or above
+	EurekaSim Application
+
+	Instructions
+	============
+
+	
+	1 . Open OneDrivePlugin.exe.It will ask to install .NET 4.6 or above if not installed.
+
+	2 . Accept the license agreement. Click next.
+
+	3 .Select location for the addin to be installed. By default it will be installed in 'Program Files'. Click next.
+
+	4 .Select between full installation and compact installation. Click next.
+	
+	5 .Now setup is  ready to install EurekaSim OneDrive Plugin. Click 'Install' and then 'Finish' to complete the installation.
+
+	6. Installation video: https://youtu.be/f6__uRlj4Mk

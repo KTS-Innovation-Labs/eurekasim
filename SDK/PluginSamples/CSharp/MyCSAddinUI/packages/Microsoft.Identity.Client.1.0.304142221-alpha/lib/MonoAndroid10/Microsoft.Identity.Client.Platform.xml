@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Identity.Client.Platform</name>
+    </assembly>
+    <members>
+        <member name="F:Microsoft.Identity.Client.BrokerConstants.BrokerAccountType">
+            Account type string.
+        </member>
+        <member name="F:Microsoft.Identity.Client.BrokerConstants.AuthtokenType">
+            Authtoken type string.
+        </member>
+        <member name="F:Microsoft.Identity.Client.BrokerConstants.ChallangeRequestCertAuthDelimeter">
+            Certificate authorities are passed with delimiter.
+        </member>
+        <member name="F:Microsoft.Identity.Client.BrokerConstants.PackageName">
+            Apk packagename that will install AD-Authenticator. It is used to
+            query if this app installed or not from package manager.
+        </member>
+        <member name="F:Microsoft.Identity.Client.BrokerConstants.Signature">
+            Signature info for Intune Company portal app that installs authenticator
+            component.
+        </member>
+        <member name="F:Microsoft.Identity.Client.BrokerConstants.AzureAuthenticatorAppSignature">
+            Signature info for Azure authenticator app that installs authenticator
+            component.
+        </member>
+        <member name="T:Microsoft.Identity.Client.PlatformParameters">
+            <summary>
+            Additional parameters used in acquiring user's authorization
+            </summary>
+        </member>
+        <member name="P:Microsoft.Identity.Client.PlatformParameters.CallerActivity">
+            <summary>
+            Caller Android Activity
+            </summary>
+        </member>
+    </members>
+</doc>
