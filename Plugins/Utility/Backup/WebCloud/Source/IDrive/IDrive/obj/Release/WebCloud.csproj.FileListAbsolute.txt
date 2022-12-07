@@ -1,0 +1,7 @@
+D:\eurekasim\Plugins\Utility\Backup\IDrive\IDrive\IDrive\obj\Release\WebCloud.csproj.AssemblyReference.cache
+D:\eurekasim\Plugins\Utility\Backup\IDrive\IDrive\IDrive\obj\Release\IDrive.About.resources
+D:\eurekasim\Plugins\Utility\Backup\IDrive\IDrive\IDrive\obj\Release\IDrive.Download.resources
+D:\eurekasim\Plugins\Utility\Backup\IDrive\IDrive\IDrive\obj\Release\ProjectFrameworkAPITest.Settings.resources
+D:\eurekasim\Plugins\Utility\Backup\IDrive\IDrive\IDrive\obj\Release\IDrive.Upload.resources
+D:\eurekasim\Plugins\Utility\Backup\IDrive\IDrive\IDrive\obj\Release\WebCloud.csproj.GenerateResource.cache
+D:\eurekasim\Plugins\Utility\Backup\IDrive\IDrive\IDrive\obj\Release\WebCloud.csproj.CoreCompileInputs.cache
