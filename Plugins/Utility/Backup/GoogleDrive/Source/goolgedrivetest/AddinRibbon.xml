@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" label="goolgedrivetest Addin">
+    <ribbon>
+        <tabs>
+            <tab id="PS.Home" label="Home">
+                <group id="PS.Tab.Group.Preference.Settings.1" label="GoogleDrive">
+                   
+					<button label="Upload" onAction="InvokeUploadDlg" image="0"/>
+					<button label="Download" onAction="InvokeDownloadDlg" image="1" />
+					<button label="Settings" onAction="InvokeSettingsDlg" image="2" />
+					<button label="About" onAction="InvokeAboutDlg" image="3" />
+				</group>
+            </tab>
+            <tab id="Sample.CS.Setup" label="GoogleDrive Setup" insertAfterQ="Basic Setup">
+                <group id="PS.Tab.Group.Default.Settings.1" label="Default Settings">
+                    <button label="Experiment Settings" onAction="InvokeDefaultSettings" image="1" />
+				</group>
+					<group id="Cs.Sample.Experimental.Setup" label="Experimental Setup" insertBeforeQ="Real Time Graph Display Options">
+						<comboBox id="Cs.Sample.Experimental.Setup.Select.Experiment" label="Select Experiment" onChange="InvokeOnExperimentChanged" itemWidth="275">
+							<item id="0" label="Select the Experiment Type" />
+							<item id="1" label="Experiment Group 1" />
+						</comboBox>
+                </group>
+            </tab>
+        </tabs>
+    </ribbon>
+</customUI>
