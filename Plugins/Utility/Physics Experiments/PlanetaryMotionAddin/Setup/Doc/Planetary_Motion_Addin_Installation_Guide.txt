@@ -5,13 +5,14 @@
 	Prerequisites
 	=============
 	EurekaSim |Stem| Simulation Software
-	.Net 4.5.2 or above installed on the system. 
+	.Net 4.5.2 or above installed on the system.
+	Operating System - Windows 7 SP1 or Later  
 
 	Instructions
 	============
 
 	
-	1 -> Launch PlanetaryMotionAddin.exe, which is the setup file for the Planetary Motion Addin.
+	1 -> Launch PlanetaryMotionAddin.exe in Administrator Mode by right clicking on the setup file and choosing Run as Administrator, which is the setup file for the Planetary Motion Addin.
 	
 	2 -> It will check wether the EurekaSim Simulation Software is installed in the system which is a prerequisite, and is Recommended to install the software before installing PlanetaryMotionAddin. If you Don't have the Software Copy Please visit "https://www.eurekasim.com/eurekasim-download.aspx" and follow the instructions to get a copy for yourself.
 	
@@ -27,5 +28,5 @@
 
 	5 -> Now setup is  ready to install Planetary Motion Addin. Click 'Install' and then 'Finish' to complete the installation.
 
-	Note: Instruction video: 
+	
 
