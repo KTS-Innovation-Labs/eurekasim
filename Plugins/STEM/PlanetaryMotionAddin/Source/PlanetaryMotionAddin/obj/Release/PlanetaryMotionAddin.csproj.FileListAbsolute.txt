@@ -1,7 +1,0 @@
-D:\Addin Project\PlanetaryMotionAddin\PlanetaryMotionAddin\bin\Release\PlanetaryMotionAddin.dll
-D:\Addin Project\PlanetaryMotionAddin\PlanetaryMotionAddin\bin\Release\PlanetaryMotionAddin.pdb
-D:\Addin Project\PlanetaryMotionAddin\PlanetaryMotionAddin\bin\Release\PlanetaryMotionAddin.tlb
-D:\Addin Project\PlanetaryMotionAddin\PlanetaryMotionAddin\obj\Release\PlanetaryMotionAddin.csproj.AssemblyReference.cache
-D:\Addin Project\PlanetaryMotionAddin\PlanetaryMotionAddin\obj\Release\PlanetaryMotionAddin.csproj.CoreCompileInputs.cache
-D:\Addin Project\PlanetaryMotionAddin\PlanetaryMotionAddin\obj\Release\PlanetaryMotionAddin.dll
-D:\Addin Project\PlanetaryMotionAddin\PlanetaryMotionAddin\obj\Release\PlanetaryMotionAddin.pdb
