@@ -8,8 +8,8 @@
                 </group>
             </tab>
             <tab id="Sample.CS.Setup" label="PlanetaryMotionAddin Setup" insertAfterQ="Basic Setup">
-                <group id="PS.Tab.Group.Default.Settings.1" label="Default Settings">
-                    <button label="Experiment Settings" onAction="InvokeDefaultSettings" image="1" />
+                <group id="PS.Tab.Group.Default.Settings.1" label="Info Group">
+                    <button label="About Author" onAction="InvokeAboutDlg" image="0" />
                 </group>
             </tab>
         </tabs>

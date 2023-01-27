@@ -154,6 +154,12 @@ namespace PlanetaryMotionAddin
         {
             MessageBox.Show("C#.InvokeDefaultSettings");
         }
+
+        public void InvokeAboutDlg()
+        {
+            About aboutDlg = new About();
+            aboutDlg.ShowDialog();
+        }
         #endregion
 
         #region ITreeNodeEvents

@@ -469,7 +469,6 @@ namespace PlanetaryMotionAddin
                     openGLView.glVertex3f(x * radius, y * radius, z * radius);
                     }
                 }
-
             // End drawing the sphere
             openGLView.glEnd();
             

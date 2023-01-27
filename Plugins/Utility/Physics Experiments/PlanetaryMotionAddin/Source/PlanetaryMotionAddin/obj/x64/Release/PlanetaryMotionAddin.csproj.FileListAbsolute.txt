@@ -5,3 +5,6 @@ D:\Addin Project\PlanetaryMotionAddin\PlanetaryMotionAddin\obj\x64\Release\Plane
 D:\Addin Project\PlanetaryMotionAddin\PlanetaryMotionAddin\obj\x64\Release\PlanetaryMotionAddin.dll
 D:\Addin Project\PlanetaryMotionAddin\PlanetaryMotionAddin\obj\x64\Release\PlanetaryMotionAddin.pdb
 D:\Addin Project\PlanetaryMotionAddin\PlanetaryMotionAddin\obj\x64\Release\PlanetaryMotionAddin.csproj.AssemblyReference.cache
+D:\Addin Project\PlanetaryMotionAddin\PlanetaryMotionAddin\obj\x64\Release\PlanetaryMotionAddin.About.resources
+D:\Addin Project\PlanetaryMotionAddin\PlanetaryMotionAddin\obj\x64\Release\PlanetaryMotionAddin.Properties.Resources.resources
+D:\Addin Project\PlanetaryMotionAddin\PlanetaryMotionAddin\obj\x64\Release\PlanetaryMotionAddin.csproj.GenerateResource.cache
