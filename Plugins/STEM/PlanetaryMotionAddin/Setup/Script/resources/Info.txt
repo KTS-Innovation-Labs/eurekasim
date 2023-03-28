@@ -1,0 +1,13 @@
+Welcome to our planetary motion simulation software! This software allows you to model the movement of celestial bodies in our solar system, and can be used to simulate the orbits of planets. It can also be used to predict their positions at any given time in the future. With this software, you will be able to conduct a wide range of simulations, from basic planetary motion to complex systems involving multiple bodies and external forces.
+
+To use the software, you will first need to input the necessary information about the celestial bodies you wish to simulate. This may include their mass, radius, and initial position and velocity. You can also choose from a variety of preset bodies, such as the planets in our solar system, or you can create your own custom body.
+
+Additionally, you can also input information about other bodies in the simulation, such as the sun or other planets, as well as any external forces that may be acting on the bodies, such as gravitational forces from other objects. You can also set the time step and duration of the simulation to customize the speed and length of the simulation.
+
+Once you have input all of the necessary information, you can run the simulation and observe the motion of the celestial bodies. The software provides a variety of visualization options such as 2D and 3D orbit representation, and also provides numerical data such as their velocity and acceleration, which can be exported in various formats like CSV, Excel or PDF.
+
+You can also adjust the simulation parameters, such as the time step and duration of the simulation, as well as the output options. Depending on the software you are using, you may also be able to save or export your simulation settings for future use, which can be later imported for further analysis or comparisons.
+
+Our software also includes a built-in library of preset scenarios, such as the Solar System, the binary stars, or the exoplanet systems, which can be used as a starting point for your own simulations.
+
+In conclusion, our planetary motion simulation software is a powerful tool for anyone interested in exploring the dynamics of celestial bodies. Whether you're a student, a researcher, or just curious about the movements of planets and moons, this software offers a wide range of features and options for simulating and analyzing planetary motion. We hope you find it useful and informative.
