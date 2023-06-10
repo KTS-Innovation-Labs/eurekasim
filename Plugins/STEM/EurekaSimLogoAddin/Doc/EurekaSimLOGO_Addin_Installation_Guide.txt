@@ -1,0 +1,32 @@
+********************************************EUREKASIM LOGO ADDIN SETUP USAGE**********************************************
+
+
+
+	Prerequisites
+	=============
+	EurekaSim |Stem| Simulation Software
+	.Net 4.5.2 or above installed on the system.
+	Operating System - Windows 7 SP1 or Later  
+
+	Instructions
+	============
+
+	
+	1 -> Launch EurekaSimLOGOAddin.exe in Administrator Mode by right clicking on the setup file and choosing Run as Administrator, which is the setup file for the EurekaSimLOGO Addin.
+	
+	2 -> It will check wether the EurekaSim Simulation Software is installed in the system which is a prerequisite, and is Recommended to install the software before installing EurekaSimLOGOAddin. If you Don't have the Software Copy Please visit "https://www.eurekasim.com/eurekasim-download.aspx" and follow the instructions to get a copy for yourself.
+	
+	3 ->  It will ask to install 
+ 	     .NET 4.5.2 or above if not installed. Click next button at the bottom.
+
+	2 -> Accept the agreement. Click next.
+
+	3 -> Select location for the addin to be installed. By default it will be installed in 'Local Drive C:\EureaSimLOGOAddin' Folder. Click next.
+
+	4 -> Select between full installation and compact installation. Full installation will have a source folder with 
+	     source files which is not present in compact installation. Click next.
+
+	5 -> Now setup is  ready to install EurekaSimLOGO Addin. Click 'Install' and then 'Finish' to complete the installation.
+
+	
+
