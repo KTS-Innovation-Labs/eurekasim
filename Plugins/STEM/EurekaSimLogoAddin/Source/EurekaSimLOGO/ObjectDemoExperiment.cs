@@ -1,7 +1,12 @@
-﻿using EurekaSim.Net;
+using EurekaSim.Net;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -87,6 +92,7 @@ namespace EurekaSimLOGO
         public LogoExperiments()
         {
             s_Color = Color.FromArgb(100, 200, 255); //black
+            m_strSimulationPattern = "Rotate";
             m_lSimulationInterval = 100;
         }
 
@@ -571,23 +577,86 @@ namespace EurekaSimLOGO
 
         private void StartLogoSystemSimulation()
         {
-            float x = 1.0f;
-            float y = 1.0f;
-            float z = 1.0f;
-            float a = 1.0f;
-            m_pManager.SetSimulationStatus(1);
+            m_pManager.SetSimulationStatus(Constants.TRUE);
             ApplicationView applicationView = new ApplicationView();
-            OpenGLView openGLView = new OpenGLView();
-            InitializeSimulationGraph(Constants.MECHANICS_TREE_LOGO_SYSTEM);
+            float Angle = (float)0.0, x = (float)0.0, y = (float)0.0, z = (float)0.0;
+            int i = 0; //Indicate Random Movment after each iteration
+            Random rnd = new Random();
             while (m_pManager.m_bSimulationActive)
             {
                 applicationView.BeginGraphicsCommands();
-                applicationView.RotateObject(1f, 0.0f, 0.0f, 1.0f);
+
+                if (m_objLogoExp.m_strSimulationPattern == Constants.OBJECT_PATTERN_TYPE_ROTATE)
+                {
+                    //Rotate the object with respect to Y Axis
+                    x = (float)0.1; y = (float)1.0; z = (float)0.1;
+
+                }
+                else if (m_objLogoExp.m_strSimulationPattern == Constants.OBJECT_PATTERN_TYPE_RANDOM)
+                {
+                    //Simulate Random Rotation
+                    switch (i)
+                    {
+                        case 0:
+                            x = (float)1.0; y = (float)0.1; z = (float)0.1;
+
+                            break;
+                        case 1:
+                            x = (float)0.1; y = (float)1.0; z = (float)0.1;
+
+                            break;
+                        case 2:
+                            x = (float)0.1; y = (float)0.1; z = (float)1.0;
+
+                            break;
+
+                    }
+                    i = rnd.Next(0, 3);
+                }
+
+                if (!m_pManager.m_b3DMode)
+                {
+                    //Set the x y Rotation point to zero for two d view
+                    x = 0;
+                    y = 0;
+                }
+                //Rotate the Object with the specified angle
+                applicationView.RotateObject(Angle, x, y, z);
                 applicationView.EndGraphicsCommands();
                 applicationView.Refresh();
-                PlotSimulationPoint(a, x, y, z);
+                //Process the Results
+                OnNextSimulationPoint(Angle, x, y, z);
+
+                Angle = Angle + 5;
+                if (Angle > 360)
+                {
+                    Angle = 0;
+                }
+                Thread.Sleep((int)m_objLogoExp.m_lSimulationInterval); //Sleep for 500 Milli seconds
+            }
+        }
+
+        public void OnNextSimulationPoint(float Angle, float x, float y, float z)
+        {
+            string strStatus = string.Format("Simulation Points (Angle:{0},X:{1},Y:{2},Z:{3})\n",
+                                            Angle, x, y, z);
+
+            if (m_pManager.m_bShowExperimentalParamaters)
+            {
+                m_pManager.AddOperationStatus(strStatus);
             }
 
+            if (m_pManager.m_bLogSimulationResultsToCSVFile)
+            {
+                string strLog = string.Format("{0},{1},{2},{3}\n", Angle, x, y, z);
+
+                m_pManager.LogSimulationPoint(strLog);
+            }
+
+            if (m_pManager.m_bDisplayRealTimeGraph)
+            {
+                PlotSimulationPoint(Angle, x, y, z);
+            }
         }
 
 

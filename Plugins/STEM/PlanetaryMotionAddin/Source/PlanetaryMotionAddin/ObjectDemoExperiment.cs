@@ -1,7 +1,12 @@
-﻿using EurekaSim.Net;
+using EurekaSim.Net;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -37,7 +42,7 @@ namespace PlanetaryMotionAddin
         public const uint GL_SPHERE = 0x0010;
 
         public const string OBJECT_TREE_ROOT_TITLE = "Object Demo";
-        
+
         public const string MECHANICS_TREE_ROOT_TITLE = "Physics";
         public const string MECHANICS_TREE_SOLAR_SYSTEM = "Solar System";
 
@@ -224,7 +229,7 @@ namespace PlanetaryMotionAddin
         }
         private void DrawExpSetup(string ExperimentName)
         {
-            
+
             if (ExperimentName == Constants.MECHANICS_TREE_SOLAR_SYSTEM)
             {
                 DrawSolarSystem();
@@ -248,15 +253,15 @@ namespace PlanetaryMotionAddin
 
                 objPropertyWindow.AddPropertyItemAsString(strGroupName, Constants.SOLAR_SIMULATION_INTERVAL_TITLE, strInterval, "Simulation Interval In Milli Seconds");
                 objPropertyWindow.AddColorPropertyItem(strGroupName, Constants.SOLAR_COLOR_TITLE, Constants.HexConverter(m_objSolarExp.s_Color), "Select Background Color");
-                
+
                 objPropertyWindow.AddColorPropertyItem(strGroupName, Constants.SUN_COLOR_TITLE, Constants.HexConverter(m_objSolarExp.sun_Color), "Select the Color");
-                
+
                 objPropertyWindow.AddColorPropertyItem(strGroupName, Constants.MERCURY_COLOR_TITLE, Constants.HexConverter(m_objSolarExp.mercury_Color), "Select the Color");
-                
+
                 objPropertyWindow.AddColorPropertyItem(strGroupName, Constants.VENUS_COLOR_TITLE, Constants.HexConverter(m_objSolarExp.venus_Color), "Select the Color");
-              
+
                 objPropertyWindow.AddColorPropertyItem(strGroupName, Constants.EARTH_COLOR_TITLE, Constants.HexConverter(m_objSolarExp.earth_Color), "Select the Color");
-        
+
                 objPropertyWindow.AddColorPropertyItem(strGroupName, Constants.MARS_COLOR_TITLE, Constants.HexConverter(m_objSolarExp.mars_Color), "Select the Color");
 
                 objPropertyWindow.EnableHeaderCtrl(Constants.FALSE);
@@ -280,8 +285,8 @@ namespace PlanetaryMotionAddin
         }
         public void OnPropertyChanged(string GroupName, string PropertyName, string PropertyValue)
         {
-           
-             if (GroupName == Constants.SOLAR_PROPERTIES_TITLE)
+
+            if (GroupName == Constants.SOLAR_PROPERTIES_TITLE)
             {
                 m_objSolarExp.OnPropertyChanged(GroupName, PropertyName, PropertyValue);
             }
@@ -294,7 +299,7 @@ namespace PlanetaryMotionAddin
         }
         public void DrawObject(string ExperimentName)
         {
-            
+
             if (m_objSolarExp.m_strObjectType == Constants.OBJECT_TYPE_SOLAR_SYSTEM)
             {
                 DrawSolarSystem();
@@ -310,7 +315,7 @@ namespace PlanetaryMotionAddin
             //Set the Background Color
             applicationView.SetBkgColor(m_objSolarExp.s_Color.R / 255,
                                         m_objSolarExp.s_Color.G / 255,
-                                        m_objSolarExp.s_Color.B/255, 1);
+                                        m_objSolarExp.s_Color.B / 255, 1);
 
             try
             {
@@ -321,7 +326,7 @@ namespace PlanetaryMotionAddin
 
                 return;
             }
-           applicationView.SetColorf(1.0f, 1.0f, 1.0f);
+            applicationView.SetColorf(1.0f, 1.0f, 1.0f);
 
             OpenGLView openGLView = new OpenGLView();
 
@@ -376,7 +381,7 @@ namespace PlanetaryMotionAddin
                 float y = (float)(1.4 * Math.Sin(theta));
                 openGLView.glVertex2f(x + 0, y + 0);
             }
-            
+
             openGLView.glEnd();
 
 
@@ -418,7 +423,7 @@ namespace PlanetaryMotionAddin
 
             // End drawing the sphere
             openGLView.glEnd();
-           
+
             DrawMercury();
             DrawVenus();
             DrawEarth();
@@ -432,7 +437,7 @@ namespace PlanetaryMotionAddin
 
         public void DrawMercury()
         {
-             OpenGLView openGLView = new OpenGLView();
+            OpenGLView openGLView = new OpenGLView();
             openGLView.glTranslatef(0.31f, 0.4f, 0.0f);
             // Begin drawing the sphere
             openGLView.glBegin(Constants.GL_TRIANGLE_FAN);
@@ -442,36 +447,36 @@ namespace PlanetaryMotionAddin
             // Define the center point of the sphere
             openGLView.glVertex3f(0.0f, 0.0f, 0.0f);
 
-                // Define the radius of the sphere
-                float radius = 0.05f;
+            // Define the radius of the sphere
+            float radius = 0.05f;
 
-                // Define the number of segments and rings
-                int segments = 200;
-                int rings = 200;
+            // Define the number of segments and rings
+            int segments = 200;
+            int rings = 200;
 
-                // Generate the vertex data for the sphere
-                for (int i = 0; i <= rings; i++)
+            // Generate the vertex data for the sphere
+            for (int i = 0; i <= rings; i++)
+            {
+                float phi = (float)(Math.PI * i / rings);
+                float sinPhi = (float)Math.Sin(phi);
+                float cosPhi = (float)Math.Cos(phi);
+
+                for (int j = 0; j <= segments; j++)
                 {
-                    float phi = (float)(Math.PI * i / rings);
-                    float sinPhi = (float)Math.Sin(phi);
-                    float cosPhi = (float)Math.Cos(phi);
+                    float theta = 2.0f * (float)Math.PI * j / segments;
+                    float sinTheta = (float)Math.Sin(theta);
+                    float cosTheta = (float)Math.Cos(theta);
 
-                    for (int j = 0; j <= segments; j++)
-                    {
-                        float theta = 2.0f * (float)Math.PI * j / segments;
-                        float sinTheta = (float)Math.Sin(theta);
-                        float cosTheta = (float)Math.Cos(theta);
-
-                        float x = cosTheta * sinPhi;
-                        float y = cosPhi;
-                        float z = sinTheta * sinPhi;
+                    float x = cosTheta * sinPhi;
+                    float y = cosPhi;
+                    float z = sinTheta * sinPhi;
 
                     openGLView.glVertex3f(x * radius, y * radius, z * radius);
-                    }
                 }
+            }
             // End drawing the sphere
             openGLView.glEnd();
-            
+
         }
 
         public void DrawVenus()
@@ -608,11 +613,11 @@ namespace PlanetaryMotionAddin
 
         public void StartSimulation(string ExperimentGroup, string ExperimentName)
         {
-            
+
             if (ExperimentGroup == Constants.MECHANICS_TREE_ROOT_TITLE && ExperimentName == Constants.MECHANICS_TREE_SOLAR_SYSTEM)
             {
                 StartSolarSystemSimulation();
-                
+
             }
             else
             {
@@ -622,26 +627,89 @@ namespace PlanetaryMotionAddin
 
         private void StartSolarSystemSimulation()
         {
-            float x = 1.0f;
-            float y = 1.0f;
-            float z = 1.0f;
-            float a = 1.0f;
-            m_pManager.SetSimulationStatus(1);
+            m_pManager.SetSimulationStatus(Constants.TRUE);
             ApplicationView applicationView = new ApplicationView();
-            OpenGLView openGLView = new OpenGLView();
-            InitializeSimulationGraph(Constants.MECHANICS_TREE_SOLAR_SYSTEM);
+            float Angle = (float)0.0, x = (float)0.0, y = (float)0.0, z = (float)0.1;
+            int i = 0; //Indicate Random Movment after each iteration
+            Random rnd = new Random();
             while (m_pManager.m_bSimulationActive)
             {
                 applicationView.BeginGraphicsCommands();
-                applicationView.RotateObject(1f, 0.0f, 0.0f, 1.0f);
-                applicationView.EndGraphicsCommands();
-                applicationView.Refresh();              
-               PlotSimulationPoint(a,x,y,z);
-            }
 
+                if (m_objSolarExp.m_strSimulationPattern == Constants.OBJECT_PATTERN_TYPE_ROTATE)
+                {
+                    //Rotate the object with respect to Y Axis
+                    x = (float)0.1; y = (float)1.0; z = (float)0.1;
+
+                }
+                else if (m_objSolarExp.m_strSimulationPattern == Constants.OBJECT_PATTERN_TYPE_RANDOM)
+                {
+                    //Simulate Random Rotation
+                    switch (i)
+                    {
+                        case 0:
+                            x = (float)1.0; y = (float)0.1; z = (float)0.1;
+
+                            break;
+                        case 1:
+                            x = (float)0.1; y = (float)1.0; z = (float)0.1;
+
+                            break;
+                        case 2:
+                            x = (float)0.1; y = (float)0.1; z = (float)1.0;
+
+                            break;
+
+                    }
+                    i = rnd.Next(0, 3);
+                }
+
+                if (!m_pManager.m_b3DMode)
+                {
+                    //Set the x y Rotation point to zero for two d view
+                    x = 0;
+                    y = 0;
+                }
+                //Rotate the Object with the specified angle
+                applicationView.RotateObject(Angle, x, y, z);
+                applicationView.EndGraphicsCommands();
+                applicationView.Refresh();
+                //Process the Results
+                OnNextSimulationPoint(Angle, x, y, z);
+
+                Angle = Angle + 5;
+                if (Angle > 360)
+                {
+                    Angle = 0;
+                }
+                Thread.Sleep((int)m_objSolarExp.m_lSimulationInterval); //Sleep for 500 Milli seconds
+            }
         }
 
-       
+        public void OnNextSimulationPoint(float Angle, float x, float y, float z)
+        {
+            string strStatus = string.Format("Simulation Points (Angle:{0},X:{1},Y:{2},Z:{3})\n",
+                                            Angle, x, y, z);
+
+            if (m_pManager.m_bShowExperimentalParamaters)
+            {
+                m_pManager.AddOperationStatus(strStatus);
+            }
+
+            if (m_pManager.m_bLogSimulationResultsToCSVFile)
+            {
+                string strLog = string.Format("{0},{1},{2},{3}\n", Angle, x, y, z);
+
+                m_pManager.LogSimulationPoint(strLog);
+            }
+
+            if (m_pManager.m_bDisplayRealTimeGraph)
+            {
+                PlotSimulationPoint(Angle, x, y, z);
+            }
+        }
+
+
         public void PlotSimulationPoint(float Angle, float x, float y, float z)
         {
             CGraphPoints pPoint = new CGraphPoints();
