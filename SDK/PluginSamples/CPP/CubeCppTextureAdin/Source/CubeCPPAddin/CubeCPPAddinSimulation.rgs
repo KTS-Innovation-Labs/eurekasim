@@ -1,0 +1,26 @@
+HKCR
+{
+	CubeCPPAddinSimulation.1 = s 'CubeCPPAddinSimulation Class'
+	{
+		CLSID = s '{a5603221-5cb4-43f4-8e66-87462d8cff91}'
+	}
+	CubeCPPAddinSimulation = s 'CubeCPPAddinSimulation Class'
+	{		
+		CurVer = s 'CubeCPPAddinSimulation.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {a5603221-5cb4-43f4-8e66-87462d8cff91} = s 'CubeCPPAddinSimulation Class'
+		{
+			ProgID = s 'CubeCPPAddinSimulation.1'
+			VersionIndependentProgID = s 'CubeCPPAddinSimulation'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			TypeLib = s '{9EB5244B-E488-42D0-AF91-6CE7DB618FD1}'
+			Version = s '1.0'
+		}
+	}
+}
