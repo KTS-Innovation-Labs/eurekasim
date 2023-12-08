@@ -8,16 +8,7 @@
 #include "AddinSimulationManager.h"
 #include "PropSliderCtrl.h"
 
-#include <GL/glu.h>
-#include <GL/freeglut.h> 
-#include <GL/glut.h>
 
-#include "std_image.h";
-#include "atlimage.h";
-#include <afxwin.h>
-#include <afxstr.h>  
-
-#include"resource.h"
 
 
 
@@ -1439,6 +1430,7 @@ void CObjectDemoExperiment::DrawRightFaceCube(ULONG textureID)
 	GLfloat Vertex = 0.55f;
 
 	OpenGLView->glBindTexture(GL_TEXTURE_2D, textureID);
+    
 	// Right face
 		OpenGLView->glTexCoord2f(Count, 0.0f); OpenGLView->glVertex3f(Vertex, -Vertex, -Vertex);
 		OpenGLView->glTexCoord2f(Count, Count); OpenGLView->glVertex3f(Vertex, Vertex, -Vertex);

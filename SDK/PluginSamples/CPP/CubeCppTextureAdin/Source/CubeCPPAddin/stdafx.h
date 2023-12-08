@@ -55,5 +55,7 @@ enum ControlTypes
 	CustomEdit
 
 };
+#include <gl/GL.h>
+#include <gl/GLU.h>
 
 #import "EurekaSim.tlb" raw_interfaces_only, raw_native_types, no_namespace, named_guids, auto_search
