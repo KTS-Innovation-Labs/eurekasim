@@ -1,0 +1,26 @@
+HKCR
+{
+	CubeTextureAddinSimulation.1 = s 'CubeTextureAddinSimulation Class'
+	{
+		CLSID = s '{f79810d7-16a0-41a4-a0e9-01d74a153ffd}'
+	}
+	CubeTextureAddinSimulation = s 'CubeTextureAddinSimulation Class'
+	{		
+		CurVer = s 'CubeTextureAddinSimulation.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {f79810d7-16a0-41a4-a0e9-01d74a153ffd} = s 'CubeTextureAddinSimulation Class'
+		{
+			ProgID = s 'CubeTextureAddinSimulation.1'
+			VersionIndependentProgID = s 'CubeTextureAddinSimulation'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			TypeLib = s '{9EB5244B-E488-42D0-AF91-6CE7DB618FD1}'
+			Version = s '1.0'
+		}
+	}
+}
