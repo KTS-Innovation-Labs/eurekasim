@@ -43,7 +43,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]    
 Source: "D:\Developer World\CubeTextureAddin\Source\Release\{#MyAppExeName}"; DestDir: "{app}\x86"; Flags:restartreplace ignoreversion regserver 32bit; 
-Source: "D:\Developer World\CubeTextureAddin\Source\x64\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "D:\Developer World\CubeTextureAddin\Source\x64\Release\{#MyAppExeName}"; DestDir: "{app}\x64";  Flags: regserver; Check: IsWin64
 Source: "D:\Developer World\CubeTextureAddin\Source\*"; DestDir: "{app}\CubeCppTextureAdin"; Flags: restartreplace ignoreversion recursesubdirs createallsubdirs; Components: source
 Source: "D:\Developer World\CubeTextureAddin\Source\Release\CubeTextureAddin.dll"; DestDir: "{app}"; Flags:  ignoreversion
 
