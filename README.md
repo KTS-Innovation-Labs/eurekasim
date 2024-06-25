@@ -5,6 +5,7 @@ EurekaSim | Scientific and Engineering Simulation Application | www.eurekasim.co
 **EurekaSim | System Requirements**
 
 **Hardware**
+
 PC | Laptop with at least 1 GB of RAM and 256 GB HDD
 
 Display Resolution : At Least 1366 X 768
