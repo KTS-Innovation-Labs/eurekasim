@@ -15,11 +15,12 @@ OpenMP | GPU Support (Optional)
 **Software**
 OS: WindowsXP | 7 | 8.1 | 10 | 11  (32 & 64 Bit)
 
-**Software Downlod Link**
+**EurekaSim | Software Downlod Link**
 
 http://www.eurekasim.com/eurekasim-download.aspx
 
+**EurekaSim | Help Topics | How-To Videos**
 
-
+http://www.eurekasim.com/help.aspx
 
 
