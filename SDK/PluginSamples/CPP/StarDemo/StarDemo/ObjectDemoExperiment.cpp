@@ -6,8 +6,6 @@
 #include "StarDemoSimulation.h"
 #include "AddinSimulationManager.h"
 #include "PropSliderCtrl.h"
-#include <gl/GL.h>
-#include <gl/GLU.h>
 
 // CPlusTwoPhysicsExperiment
 using namespace ATL;
