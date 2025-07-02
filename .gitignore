@@ -1,0 +1,20 @@
+# Visual Studio
+.vs/
+ipch/
+x64/
+*.VC.db
+*.opendb
+*.suo
+*.user
+*.obj
+*.pdb
+*.exe
+
+# Python
+__pycache__/
+*.pyc
+
+# C#
+bin/
+obj/
+*.user

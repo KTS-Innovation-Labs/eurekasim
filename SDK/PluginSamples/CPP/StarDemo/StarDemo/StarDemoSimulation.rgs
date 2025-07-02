@@ -1,0 +1,26 @@
+HKCR
+{
+	StarDemoSimulation.1 = s 'StarDemoSimulation Class'
+	{
+		CLSID = s '{9d706356-841e-4ff8-90ad-21c808be08ef}'
+	}
+	StarDemoSimulation = s 'StarDemoSimulation Class'
+	{		
+		CurVer = s 'StarDemoSimulation.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {9d706356-841e-4ff8-90ad-21c808be08ef} = s 'StarDemoSimulation Class'
+		{
+			ProgID = s 'StarDemoSimulation.1'
+			VersionIndependentProgID = s 'StarDemoSimulation'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			TypeLib = s '{9EB5244B-E488-42D0-AF91-6CE7DB618FD1}'
+			Version = s '1.0'
+		}
+	}
+}
