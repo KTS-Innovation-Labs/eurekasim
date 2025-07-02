@@ -145,7 +145,6 @@ public:
 	void PlotSimulationPoint(float Angle, float x, float y, float z);
 	void InitializeSimulationGraph(CString ExperimentName);
 	void DisplayObjectDemoGraph();
-	void DrawCircle(float segments, float radius, float sx, float sy);
 };
 
 

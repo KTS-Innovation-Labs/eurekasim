@@ -1026,22 +1026,3 @@ void CObjectDemoExperiment::DisplayObjectDemoGraph()
 	}
 }
 
-void CObjectDemoExperiment::DrawCircle(float segments, float radius, float sx, float sy)
-{
-	CComPtr<IOpenGLView> OpenGLView;
-	HRESULT HR = OpenGLView.CoCreateInstance(CLSID_OpenGLView);
-	if (FAILED(HR))
-	{
-		return;
-	}
-
-	OpenGLView->glBegin(GL_LINE_LOOP);
-	for (int i = 0; i<segments; i++)
-	{
-		float theta = (float)(2.0*3.142*float(i) / float(segments)); //get the current angle
-		float x = (float)(radius*cos(theta));
-		float y = (float)(radius*sin(theta));
-		OpenGLView->glVertex2f(x + sx, y + sy);
-	}
-	OpenGLView->glEnd();
-}
