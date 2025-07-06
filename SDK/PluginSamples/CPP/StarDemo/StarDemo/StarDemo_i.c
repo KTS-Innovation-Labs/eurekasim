@@ -6,7 +6,7 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Mon Jun 30 11:06:59 2025
+/* at Fri Jul 04 14:56:36 2025
  */
 /* Compiler settings for StarDemo.idl:
     Oicf, W1, Zp8, env=Win64 (32b run), target_arch=AMD64 8.00.0603 

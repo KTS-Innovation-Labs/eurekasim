@@ -67,7 +67,7 @@ void CObjectDemoExperiment::OnReloadExperiment(BSTR ExperimentGroup, BSTR Experi
 	}
 	else
 	{
-		
+
 	}
 
 }
@@ -169,7 +169,7 @@ void CObjectDemoExperiment::ShowObjectProperties()
 	}
 	//This section demonstrates Other property Controls which is present in this Framework
 #endif
-	
+
 }
 
 void CObjectDemoExperiment::Serialize(CArchive& ar)
@@ -192,18 +192,22 @@ void CObjectDemoExperiment::OnPropertyChanged(BSTR GroupName, BSTR PropertyName,
 
 		if (CString(PropertyName) == OBJECT_COLOR_TITLE)
 		{
-			m_ObjectPattern.m_UserSelectedColor = m_ObjectPattern.m_Color; // Save latest user color
+			m_ObjectPattern.m_UserSelectedColor = m_ObjectPattern.m_Color; // save latest user color
 		}
 
 		if (CString(PropertyName) == OBJECT_TYPE_TITLE)
 		{
-			m_ObjectPattern.m_strSimulationPattern = _T("Rotate");
+			m_ObjectPattern.m_strSimulationPattern = _T("Rotate");// set to default
+			m_ObjectPattern.m_Color = RGB(0, 0, 255);
+			m_ObjectPattern.m_lSimulationInterval = 100;
+			m_ObjectPattern.m_UserSelectedColor = m_ObjectPattern.m_Color; // save latest user color
+
 			ShowObjectProperties();
 			return;
 		}
 	}
 
-	DrawScene(); 
+	DrawScene();
 }
 
 void CObjectDemoExperiment::DrawScene()
@@ -228,7 +232,7 @@ void CObjectDemoExperiment::DrawObject(CString ExperimentName)
 
 void CObjectDemoExperiment::DrawCube()
 {
-	
+
 	CComPtr<IApplicationView> ApplicationView;
 	HRESULT HR = ApplicationView.CoCreateInstance(CLSID_ApplicationView);
 	if (FAILED(HR))
@@ -238,10 +242,10 @@ void CObjectDemoExperiment::DrawCube()
 
 	//We can use all the normal OpenGL API defined in the standard Opengl header file
 	const float radius = 0.34f;
-	
+
 	ApplicationView->InitializeEnvironment(TRUE);
 	ApplicationView->BeginGraphicsCommands();
-	
+
 	//Set the Background Color
 	ApplicationView->SetBkgColor(GetRValue(m_ObjectPattern.m_Color) / (float)255.0, GetGValue(m_ObjectPattern.m_Color) / (float)255.0,
 		GetBValue(m_ObjectPattern.m_Color) / (float)255.0, 1.0);
@@ -259,48 +263,48 @@ void CObjectDemoExperiment::DrawCube()
 	{
 		return;
 	}
-	
+
 
 	OpenGLView->glBegin(GL_QUAD_STRIP);
-		OpenGLView->glColor3f(1.0f, 0.0f, 1.0f);
-		OpenGLView->glVertex3f(-0.3f, 0.3f, 0.3f);
-		OpenGLView->glColor3f(1.0f, 0.0f, 0.0f);
-		OpenGLView->glVertex3f(-0.3f, -0.3f, 0.3f);
-		OpenGLView->glColor3f(1.0f, 1.0f, 1.0f);
-		OpenGLView->glVertex3f(0.3f, 0.3f, 0.3f);
-		OpenGLView->glColor3f(1.0f, 1.0f, 0.0f);
-		OpenGLView->glVertex3f(0.3f, -0.3f, 0.3f);
-		OpenGLView->glColor3f(0.0f, 1.0f, 1.0f);
-		OpenGLView->glVertex3f(0.3f, 0.3f, -0.3f);
-		OpenGLView->glColor3f(0.0f, 1.0f, 0.0f);
-		OpenGLView->glVertex3f(0.3f, -0.3f, -0.3f);
-		OpenGLView->glColor3f(0.0f, 0.0f, 1.0f);
-		OpenGLView->glVertex3f(-0.3f, 0.3f, -0.3f);
-		OpenGLView->glColor3f(0.0f, 0.0f, 0.0f);
-		OpenGLView->glVertex3f(-0.3f, -0.3f, -0.3f);
-		OpenGLView->glColor3f(1.0f, 0.0f, 1.0f);
-		OpenGLView->glVertex3f(-0.3f, 0.3f, 0.3f);
-		OpenGLView->glColor3f(1.0f, 0.0f, 0.0f);
-		OpenGLView->glVertex3f(-0.3f, -0.3f, 0.3f);
+	OpenGLView->glColor3f(1.0f, 0.0f, 1.0f);
+	OpenGLView->glVertex3f(-0.3f, 0.3f, 0.3f);
+	OpenGLView->glColor3f(1.0f, 0.0f, 0.0f);
+	OpenGLView->glVertex3f(-0.3f, -0.3f, 0.3f);
+	OpenGLView->glColor3f(1.0f, 1.0f, 1.0f);
+	OpenGLView->glVertex3f(0.3f, 0.3f, 0.3f);
+	OpenGLView->glColor3f(1.0f, 1.0f, 0.0f);
+	OpenGLView->glVertex3f(0.3f, -0.3f, 0.3f);
+	OpenGLView->glColor3f(0.0f, 1.0f, 1.0f);
+	OpenGLView->glVertex3f(0.3f, 0.3f, -0.3f);
+	OpenGLView->glColor3f(0.0f, 1.0f, 0.0f);
+	OpenGLView->glVertex3f(0.3f, -0.3f, -0.3f);
+	OpenGLView->glColor3f(0.0f, 0.0f, 1.0f);
+	OpenGLView->glVertex3f(-0.3f, 0.3f, -0.3f);
+	OpenGLView->glColor3f(0.0f, 0.0f, 0.0f);
+	OpenGLView->glVertex3f(-0.3f, -0.3f, -0.3f);
+	OpenGLView->glColor3f(1.0f, 0.0f, 1.0f);
+	OpenGLView->glVertex3f(-0.3f, 0.3f, 0.3f);
+	OpenGLView->glColor3f(1.0f, 0.0f, 0.0f);
+	OpenGLView->glVertex3f(-0.3f, -0.3f, 0.3f);
 	OpenGLView->glEnd();
 
 	OpenGLView->glBegin(GL_QUADS);
-		OpenGLView->glColor3f(1.0f, 0.0f, 1.0f);
-		OpenGLView->glVertex3f(-0.3f, 0.3f, 0.3f);
-		OpenGLView->glColor3f(1.0f, 1.0f, 1.0f);
-		OpenGLView->glVertex3f(0.3f, 0.3f, 0.3f);
-		OpenGLView->glColor3f(0.0f, 1.0f, 1.0f);
-		OpenGLView->glVertex3f(0.3f, 0.3f, -0.3f);
-		OpenGLView->glColor3f(0.0f, 0.0f, 1.0f);
-		OpenGLView->glVertex3f(-0.3f, 0.3f, -0.3f);
-		OpenGLView->glColor3f(1.0f, 0.0f, 0.0f);
-		OpenGLView->glVertex3f(-0.3f, -0.3f, 0.3f);
-		OpenGLView->glColor3f(0.0f, 0.0f, 0.0f);
-		OpenGLView->glVertex3f(-0.3f, -0.3f, -0.3f);
-		OpenGLView->glColor3f(0.0f, 1.0f, 0.0f);
-		OpenGLView->glVertex3f(0.3f, -0.3f, -0.3f);
-		OpenGLView->glColor3f(1.0f, 1.0f, 0.0f);
-		OpenGLView->glVertex3f(0.3f, -0.3f, 0.3f);
+	OpenGLView->glColor3f(1.0f, 0.0f, 1.0f);
+	OpenGLView->glVertex3f(-0.3f, 0.3f, 0.3f);
+	OpenGLView->glColor3f(1.0f, 1.0f, 1.0f);
+	OpenGLView->glVertex3f(0.3f, 0.3f, 0.3f);
+	OpenGLView->glColor3f(0.0f, 1.0f, 1.0f);
+	OpenGLView->glVertex3f(0.3f, 0.3f, -0.3f);
+	OpenGLView->glColor3f(0.0f, 0.0f, 1.0f);
+	OpenGLView->glVertex3f(-0.3f, 0.3f, -0.3f);
+	OpenGLView->glColor3f(1.0f, 0.0f, 0.0f);
+	OpenGLView->glVertex3f(-0.3f, -0.3f, 0.3f);
+	OpenGLView->glColor3f(0.0f, 0.0f, 0.0f);
+	OpenGLView->glVertex3f(-0.3f, -0.3f, -0.3f);
+	OpenGLView->glColor3f(0.0f, 1.0f, 0.0f);
+	OpenGLView->glVertex3f(0.3f, -0.3f, -0.3f);
+	OpenGLView->glColor3f(1.0f, 1.0f, 0.0f);
+	OpenGLView->glVertex3f(0.3f, -0.3f, 0.3f);
 
 	OpenGLView->glEnd();
 
@@ -313,14 +317,14 @@ void CObjectDemoExperiment::DrawCube()
 	OpenGLView->glRasterPos3f(radius, -radius, -radius);
 	OpenGLView->glRasterPos3f(-radius, radius, -radius);
 	OpenGLView->glRasterPos3f(-radius, -radius, -radius);
-	
+
 	//Set the Inner Sphere Color
-	
-	
+
+
 	ApplicationView->EndNewDisplayList();
 	ApplicationView->EndGraphicsCommands();
 	ApplicationView->Refresh();
-	
+
 }
 void CObjectDemoExperiment::DrawStar() {
 	{
@@ -869,7 +873,7 @@ void CObjectDemoExperiment::StartObjectSimulation()
 void CObjectDemoExperiment::OnNextSimulationPoint(float Angle, float x, float y, float z)
 {
 	CString strStatus;
-	strStatus.Format(_T("Simulation Points (Angle:%.3f,X:%.3f,Y:%.3f,Z:%.3f)\n"), Angle,x,y,z);
+	strStatus.Format(_T("Simulation Points (Angle:%.3f,X:%.3f,Y:%.3f,Z:%.3f)\n"), Angle, x, y, z);
 
 	if (m_pManager->m_bShowExperimentalParamaters)
 	{
@@ -885,7 +889,7 @@ void CObjectDemoExperiment::OnNextSimulationPoint(float Angle, float x, float y,
 
 	if (m_pManager->m_bDisplayRealTimeGraph)
 	{
-		PlotSimulationPoint(Angle,x,y,z);
+		PlotSimulationPoint(Angle, x, y, z);
 	}
 }
 
@@ -910,7 +914,7 @@ void CObjectDemoExperiment::PlotSimulationPoint(float Angle, float x, float y, f
 
 void CObjectDemoExperiment::InitializeSimulationGraph(CString ExperimentName)
 {
-	
+
 	for (int i = 0; i < m_PlotInfoArray.GetCount(); i++)
 	{
 		CGraphPoints* pPoint = (CGraphPoints*)m_PlotInfoArray.GetAt(i);
@@ -955,14 +959,14 @@ void CObjectDemoExperiment::DisplayObjectDemoGraph()
 	COleSafeArray			saX;
 	COleSafeArray			saY;
 	COleSafeArray			saZ;
-	
+
 	SAFEARRAYBOUND			sabX[2];
 	SAFEARRAYBOUND			sabY[2];
 	SAFEARRAYBOUND			sabZ[2];
-	
+
 	sabX[0].cElements = iArraySize;// give this exact
 	sabX[1].cElements = 2; //number of columns + 1 (because the first column is where we put 
-										 // the row labels - ie in 1.1, 2.1, 3.1, 4,1 etc
+						   // the row labels - ie in 1.1, 2.1, 3.1, 4,1 etc
 	sabX[0].lLbound = sabX[1].lLbound = 1;
 
 	saX.Create(VT_R8, 2, sabX);
@@ -970,7 +974,7 @@ void CObjectDemoExperiment::DisplayObjectDemoGraph()
 	//
 	sabY[0].cElements = iArraySize;// give this exact
 	sabY[1].cElements = 2; //number of columns + 1 (because the first column is where we put 
-									  // the row labels - ie in 1.1, 2.1, 3.1, 4,1 etc
+						   // the row labels - ie in 1.1, 2.1, 3.1, 4,1 etc
 	sabY[0].lLbound = sabY[1].lLbound = 1;
 
 	saY.Create(VT_R8, 2, sabY);
@@ -979,7 +983,7 @@ void CObjectDemoExperiment::DisplayObjectDemoGraph()
 
 	sabZ[0].cElements = iArraySize;// give this exact
 	sabZ[1].cElements = 2; //number of columns + 1 (because the first column is where we put 
-									  // the row labels - ie in 1.1, 2.1, 3.1, 4,1 etc
+						   // the row labels - ie in 1.1, 2.1, 3.1, 4,1 etc
 	sabZ[0].lLbound = sabZ[1].lLbound = 1;
 
 	saZ.Create(VT_R8, 2, sabZ);
@@ -997,7 +1001,7 @@ void CObjectDemoExperiment::DisplayObjectDemoGraph()
 		saX.PutElement(index, &pValue);
 		saY.PutElement(index, &pValue);
 		saZ.PutElement(index, &pValue);
-		
+
 		//Now plot the other Y Value for each data
 		index[1] = 2;
 		pValue = pInfo->m_x; //set the X 
@@ -1020,9 +1024,8 @@ void CObjectDemoExperiment::DisplayObjectDemoGraph()
 			ApplicationChart->Set2dChartData(0, saX);
 			ApplicationChart->Set2dChartData(1, saY);
 			ApplicationChart->Set2dChartData(2, saZ);
-			
+
 		}
-		
+
 	}
 }
-
