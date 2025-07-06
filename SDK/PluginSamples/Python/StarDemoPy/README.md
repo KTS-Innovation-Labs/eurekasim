@@ -1,4 +1,4 @@
-# 🌟 Star Object Python Plugin | EurekaSim
+# ⭐ Star Object Python Plugin | EurekaSim
 
 A **Star object plugin** created using the **EurekaSim Addin Wizard**.
 
