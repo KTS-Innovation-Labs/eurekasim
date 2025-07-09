@@ -108,7 +108,7 @@ class ObjectPattern:
             self.m_UserSelectedColor = self.m_Color #save latest user color
         elif PropertyName == OBJECT_COLOR_TITLE:
             self.m_Color = Colour.fromInt(int(PropertyValue,10))
-            self.m_UserSelectedColor = self.m_Color
+            self.m_UserSelectedColor = self.m_Color #save latest user color
 
         elif PropertyName == OBJECT_SIMULATION_PATTERN_TITLE:
             self.m_strSimulationPattern = PropertyValue
@@ -758,9 +758,9 @@ class ObjectDemoExperiment():
                 elif (self.m_ObjectPattern.m_strSimulationPattern == OBJECT_PATTERN_TYPE_GLOW):
                     
                     if self.m_bGlowToggle:
-                        self.m_ObjectPattern.m_Color = Colour(255, 215, 0)  # Glow gold
+                        self.m_ObjectPattern.m_Color = Colour(255, 215, 0)  # glow gold
                     else:
-                        self.m_ObjectPattern.m_Color = self.m_ObjectPattern.m_UserSelectedColor  #Always latest user bg color
+                        self.m_ObjectPattern.m_Color = self.m_ObjectPattern.m_UserSelectedColor  #always latest user bg color
 
                     self.m_bGlowToggle = not self.m_bGlowToggle
 
