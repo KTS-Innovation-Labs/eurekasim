@@ -818,9 +818,9 @@ void CObjectDemoExperiment::StartObjectSimulation()
 			static bool bGlowToggle = false;
 
 			if (bGlowToggle)
-				m_ObjectPattern.m_Color = RGB(255, 215, 0); // Glow gold
+				m_ObjectPattern.m_Color = RGB(255, 215, 0); // glow gold
 			else
-				m_ObjectPattern.m_Color = m_ObjectPattern.m_UserSelectedColor; // Always latest user bg color
+				m_ObjectPattern.m_Color = m_ObjectPattern.m_UserSelectedColor; // always latest user bg color
 
 			bGlowToggle = !bGlowToggle;
 
