@@ -14,8 +14,6 @@ This plugin demonstrates the use of object simulations in EurekaSim, allowing us
 > ⚠ **Trigger Warning**:  
 > The glow simulation may cause **flashing lights**, especially with low simulation intervals. Use with caution if you are sensitive to flashing effects.
 
----
-
 ## Demo Video
 
 Watch a short demonstration of the plugin in action:
