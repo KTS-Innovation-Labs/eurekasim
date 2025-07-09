@@ -2,7 +2,9 @@
 
 A **Star object plugin** created using the **EurekaSim Addin Wizard**.
 
-This plugin demonstrates the use of object simulations in EurekaSim, allowing users to toggle between different simulation patterns, including a glow effect.
+This plugin demonstrates the use of object simulations in EurekaSim, allowing users to toggle between different simulation patterns, including a glow simulation pattern for the star object.
+
+---
 
 ## Features
 
