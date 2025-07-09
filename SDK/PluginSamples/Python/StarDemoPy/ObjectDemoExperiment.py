@@ -394,7 +394,7 @@ class ObjectDemoExperiment():
 
         openGLView.glColor3f(1.0, 0.843, 0.0) 
 
-        openGLView.glBegin(GL_TRIANGLES)                       #top let vertex of star
+        openGLView.glBegin(GL_TRIANGLES)                       #top left vertex of star
         openGLView.glVertex3f(0.0, 0.4, 0.4703) 
         openGLView.glVertex3f(-0.3804, 0.1236, 0.4703) 
 
@@ -482,7 +482,7 @@ class ObjectDemoExperiment():
 
         openGLView.glColor3f(1.0, 0.843, 0.0) 
 
-        openGLView.glBegin(GL_TRIANGLES)                           #bottom let vertex of star
+        openGLView.glBegin(GL_TRIANGLES)                           #bottom left vertex of star
         openGLView.glVertex3f(-0.3804, 0.1236, 0.4703) 
         openGLView.glVertex3f(-0.2351, -0.3236, 0.4703) 
 
@@ -572,7 +572,7 @@ class ObjectDemoExperiment():
         openGLView.glColor3f(0.0, 0.0, 0.0)             #black colour for drawing borders
         openGLView.glLineWidth(2.0) 
 
-        openGLView.glBegin(GL_LINE_LOOP)                #border for back pentagon face
+        openGLView.glBegin(GL_LINE_LOOP)                #border of back pentagon face
         openGLView.glVertex3f(0.0, 0.4, 0.0) 
         openGLView.glVertex3f(0.3804, 0.1236, 0.0) 
         openGLView.glVertex3f(0.2351, -0.3236, 0.0) 
@@ -663,7 +663,7 @@ class ObjectDemoExperiment():
         openGLView.glEnd()
 
 
-        openGLView.glBegin(GL_LINE_LOOP)                          #border of bottom let vertex
+        openGLView.glBegin(GL_LINE_LOOP)                          #border of bottom left vertex
         openGLView.glVertex3f(-0.3804, 0.1236, 0.4703)
         openGLView.glVertex3f(-0.2351, -0.3236, 0.4703)
         openGLView.glVertex3f(-0.6951, -0.2259, 0.2351)
