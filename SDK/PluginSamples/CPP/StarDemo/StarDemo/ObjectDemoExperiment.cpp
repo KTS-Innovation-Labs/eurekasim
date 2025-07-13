@@ -387,7 +387,7 @@ void CObjectDemoExperiment::DrawStar() {
 
 		OpenGLView->glColor3f(1.0f, 0.843f, 0.0f);
 
-		OpenGLView->glBegin(GL_TRIANGLES);					//top right vertex of the star
+		OpenGLView->glBegin(GL_TRIANGLES);					//top right vertex of star
 		OpenGLView->glVertex3f(0.0f, 0.4f, 0.4703f);
 		OpenGLView->glVertex3f(0.3804f, 0.1236f, 0.4703f);
 
@@ -818,24 +818,20 @@ void CObjectDemoExperiment::StartObjectSimulation()
 			static bool bGlowToggle = false;
 
 			if (bGlowToggle)
-				m_ObjectPattern.m_Color = RGB(255, 215, 0); // Glow gold
+				m_ObjectPattern.m_Color = RGB(255, 215, 0); // glow gold
 			else
-				m_ObjectPattern.m_Color = m_ObjectPattern.m_UserSelectedColor; // Always latest user bg color
+				m_ObjectPattern.m_Color = m_ObjectPattern.m_UserSelectedColor; // always latest user bg color
 
 			bGlowToggle = !bGlowToggle;
 
-			ApplicationView->BeginGraphicsCommands();
+			
 			ApplicationView->SetBkgColor(
 				GetRValue(m_ObjectPattern.m_Color) / 255.0f,
 				GetGValue(m_ObjectPattern.m_Color) / 255.0f,
 				GetBValue(m_ObjectPattern.m_Color) / 255.0f,
 				1.0f
 			);
-			ApplicationView->EndGraphicsCommands();
-			ApplicationView->Refresh();
-
-			Sleep(m_ObjectPattern.m_lSimulationInterval);
-			continue;
+			
 		}
 		if (!m_pManager->m_b3DMode)
 		{

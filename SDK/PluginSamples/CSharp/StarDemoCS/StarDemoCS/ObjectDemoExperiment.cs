@@ -130,12 +130,12 @@ namespace StarDemoCS
                 m_strSimulationPattern = "Rotate"; //set to default
                 m_Color = Color.FromArgb(0, 0, 255);
                 m_lSimulationInterval = 100;
-                m_UserSelectedColor = m_Color; // save latest user color
+                m_UserSelectedColor = m_Color; // save latest user bg color
             }
             else if (PropertyName == Constants.OBJECT_COLOR_TITLE)
             {
                 m_Color = Color.FromArgb(Convert.ToInt32(PropertyValue));
-                m_UserSelectedColor = m_Color; // save latest user color
+                m_UserSelectedColor = m_Color; // save latest user bg color
             }
             else if (PropertyName == Constants.OBJECT_SIMULATION_PATTERN_TITLE)
             {
@@ -626,7 +626,7 @@ namespace StarDemoCS
 
             openGLView.glColor3f(1.0f, 0.843f, 0.0f);
 
-            openGLView.glBegin(Constants.GL_TRIANGLES);                  //top right vertex of the star
+            openGLView.glBegin(Constants.GL_TRIANGLES);                  //top right vertex of star
             openGLView.glVertex3f(0.0f, 0.4f, 0.4703f);
             openGLView.glVertex3f(0.3804f, 0.1236f, 0.4703f);
 
@@ -1045,24 +1045,20 @@ namespace StarDemoCS
                 else if (m_ObjectPattern.m_strSimulationPattern == Constants.OBJECT_PATTERN_TYPE_GLOW)
                 {
                     if (bGlowToggle)
-                        m_ObjectPattern.m_Color = Color.FromArgb(255, 215, 0); // Glow gold
+                        m_ObjectPattern.m_Color = Color.FromArgb(255, 215, 0); // glow gold
                     else
-                        m_ObjectPattern.m_Color = m_ObjectPattern.m_UserSelectedColor; // Always latest user bg color
+                        m_ObjectPattern.m_Color = m_ObjectPattern.m_UserSelectedColor; // always latest user bg color
 
                     bGlowToggle = !bGlowToggle;
 
-                    applicationView.BeginGraphicsCommands();
                     applicationView.SetBkgColor(
                          m_ObjectPattern.m_Color.R / 255f,
                          m_ObjectPattern.m_Color.G / 255f,
                          m_ObjectPattern.m_Color.B / 255f,
                                        1.0f
                     );
-                    applicationView.EndGraphicsCommands();
-                    applicationView.Refresh();
-
+                    
                     Thread.Sleep((int)m_ObjectPattern.m_lSimulationInterval);
-                    continue;
                 }
 
                 if (!m_pManager.m_b3DMode)

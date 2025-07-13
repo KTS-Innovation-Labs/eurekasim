@@ -105,10 +105,10 @@ class ObjectPattern:
             self.m_strSimulationPattern = "Rotate"  #set to default
             self.m_Color = Colour(0, 0, 255)
             self.m_lSimulationInterval = 100
-            self.m_UserSelectedColor = self.m_Color #save latest user color
+            self.m_UserSelectedColor = self.m_Color #save latest user bg color
         elif PropertyName == OBJECT_COLOR_TITLE:
             self.m_Color = Colour.fromInt(int(PropertyValue,10))
-            self.m_UserSelectedColor = self.m_Color
+            self.m_UserSelectedColor = self.m_Color #save latest user bg color
 
         elif PropertyName == OBJECT_SIMULATION_PATTERN_TITLE:
             self.m_strSimulationPattern = PropertyValue
@@ -350,7 +350,7 @@ class ObjectDemoExperiment():
 
         openGLView.glColor3f(1.0, 0.843, 0.0) 
 
-        openGLView.glBegin(GL_TRIANGLES)                  #top right vertex of the star
+        openGLView.glBegin(GL_TRIANGLES)                  #top right vertex of star
         openGLView.glVertex3f(0.0, 0.4, 0.4703) 
         openGLView.glVertex3f(0.3804, 0.1236, 0.4703) 
 
@@ -394,7 +394,7 @@ class ObjectDemoExperiment():
 
         openGLView.glColor3f(1.0, 0.843, 0.0) 
 
-        openGLView.glBegin(GL_TRIANGLES)                       #top let vertex of star
+        openGLView.glBegin(GL_TRIANGLES)                       #top left vertex of star
         openGLView.glVertex3f(0.0, 0.4, 0.4703) 
         openGLView.glVertex3f(-0.3804, 0.1236, 0.4703) 
 
@@ -482,7 +482,7 @@ class ObjectDemoExperiment():
 
         openGLView.glColor3f(1.0, 0.843, 0.0) 
 
-        openGLView.glBegin(GL_TRIANGLES)                           #bottom let vertex of star
+        openGLView.glBegin(GL_TRIANGLES)                           #bottom left vertex of star
         openGLView.glVertex3f(-0.3804, 0.1236, 0.4703) 
         openGLView.glVertex3f(-0.2351, -0.3236, 0.4703) 
 
@@ -663,7 +663,7 @@ class ObjectDemoExperiment():
         openGLView.glEnd()
 
 
-        openGLView.glBegin(GL_LINE_LOOP)                          #border of bottom let vertex
+        openGLView.glBegin(GL_LINE_LOOP)                          #border of bottom left vertex
         openGLView.glVertex3f(-0.3804, 0.1236, 0.4703)
         openGLView.glVertex3f(-0.2351, -0.3236, 0.4703)
         openGLView.glVertex3f(-0.6951, -0.2259, 0.2351)
@@ -758,20 +758,16 @@ class ObjectDemoExperiment():
                 elif (self.m_ObjectPattern.m_strSimulationPattern == OBJECT_PATTERN_TYPE_GLOW):
                     
                     if self.m_bGlowToggle:
-                        self.m_ObjectPattern.m_Color = Colour(255, 215, 0)  # Glow gold
+                        self.m_ObjectPattern.m_Color = Colour(255, 215, 0)  # glow gold
                     else:
-                        self.m_ObjectPattern.m_Color = self.m_ObjectPattern.m_UserSelectedColor  #Always latest user bg color
+                        self.m_ObjectPattern.m_Color = self.m_ObjectPattern.m_UserSelectedColor  #always latest user bg color
 
                     self.m_bGlowToggle = not self.m_bGlowToggle
 
-                    applicationView.BeginGraphicsCommands()
                     applicationView.SetBkgColor(self.m_ObjectPattern.m_Color.R / 255.0,
                     self.m_ObjectPattern.m_Color.G / 255.0, self.m_ObjectPattern.m_Color.B / 255.0,1.0)
-                    applicationView.EndGraphicsCommands()
-                    applicationView.Refresh()
 
                     time.sleep(self.m_ObjectPattern.m_lSimulationInterval/1000)
-                    continue 
                 
                 if self.m_objManager.m_b3DMode == False:
                     x=0
