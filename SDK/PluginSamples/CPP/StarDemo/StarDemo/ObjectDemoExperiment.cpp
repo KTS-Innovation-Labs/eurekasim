@@ -192,7 +192,7 @@ void CObjectDemoExperiment::OnPropertyChanged(BSTR GroupName, BSTR PropertyName,
 
 		if (CString(PropertyName) == OBJECT_COLOR_TITLE)
 		{
-			m_ObjectPattern.m_UserSelectedColor = m_ObjectPattern.m_Color; // save latest user color
+			m_ObjectPattern.m_UserSelectedColor = m_ObjectPattern.m_Color; // save latest user bg color
 		}
 
 		if (CString(PropertyName) == OBJECT_TYPE_TITLE)
@@ -200,7 +200,7 @@ void CObjectDemoExperiment::OnPropertyChanged(BSTR GroupName, BSTR PropertyName,
 			m_ObjectPattern.m_strSimulationPattern = _T("Rotate");// set to default
 			m_ObjectPattern.m_Color = RGB(0, 0, 255);
 			m_ObjectPattern.m_lSimulationInterval = 100;
-			m_ObjectPattern.m_UserSelectedColor = m_ObjectPattern.m_Color; // save latest user color
+			m_ObjectPattern.m_UserSelectedColor = m_ObjectPattern.m_Color; // save latest user bg color
 
 			ShowObjectProperties();
 			return;
