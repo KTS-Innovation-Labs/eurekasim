@@ -572,7 +572,7 @@ class ObjectDemoExperiment():
         openGLView.glColor3f(0.0, 0.0, 0.0)             #black colour for drawing borders
         openGLView.glLineWidth(2.0) 
 
-        openGLView.glBegin(GL_LINE_LOOP)                #border for back pentagon face
+        openGLView.glBegin(GL_LINE_LOOP)                #border of back pentagon face
         openGLView.glVertex3f(0.0, 0.4, 0.0) 
         openGLView.glVertex3f(0.3804, 0.1236, 0.0) 
         openGLView.glVertex3f(0.2351, -0.3236, 0.0) 
