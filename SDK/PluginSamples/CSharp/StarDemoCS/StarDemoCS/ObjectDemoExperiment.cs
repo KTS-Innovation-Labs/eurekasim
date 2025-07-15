@@ -1055,7 +1055,7 @@ namespace StarDemoCS
                          m_ObjectPattern.m_Color.R / 255f,
                          m_ObjectPattern.m_Color.G / 255f,
                          m_ObjectPattern.m_Color.B / 255f,
-                                       1.0f
+                         1.0f
                     );
                 }
 
