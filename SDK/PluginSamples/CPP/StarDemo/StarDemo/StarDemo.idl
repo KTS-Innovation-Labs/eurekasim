@@ -1,0 +1,37 @@
+// StarDemo.idl : IDL source for StarDemo
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (StarDemo.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(CF2C8CEE-F445-4F90-99D2-1277679D8597),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IStarDemoSimulation : IDispatch{
+	[id(1)] HRESULT InvokePreferenceSettings();
+	[id(2)] HRESULT InvokeDefaultSettings();
+	[id(3)] HRESULT InvokeOnExperimentChanged();
+};
+[
+	uuid(9EB5244B-E488-42D0-AF91-6CE7DB618FD1),
+	version(1.0),
+]
+library StarDemoLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(9d706356-841e-4ff8-90ad-21c808be08ef)		
+	]
+	coclass StarDemoSimulation
+	{
+		[default] interface IStarDemoSimulation;
+	};
+};
+
