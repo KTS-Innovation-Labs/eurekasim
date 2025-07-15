@@ -824,7 +824,6 @@ void CObjectDemoExperiment::StartObjectSimulation()
 
 			bGlowToggle = !bGlowToggle;
 
-			
 			ApplicationView->SetBkgColor(
 				GetRValue(m_ObjectPattern.m_Color) / 255.0f,
 				GetGValue(m_ObjectPattern.m_Color) / 255.0f,

@@ -1057,8 +1057,6 @@ namespace StarDemoCS
                          m_ObjectPattern.m_Color.B / 255f,
                                        1.0f
                     );
-                    
-                    Thread.Sleep((int)m_ObjectPattern.m_lSimulationInterval);
                 }
 
                 if (!m_pManager.m_b3DMode)

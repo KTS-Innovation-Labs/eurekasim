@@ -767,8 +767,6 @@ class ObjectDemoExperiment():
                     applicationView.SetBkgColor(self.m_ObjectPattern.m_Color.R / 255.0,
                     self.m_ObjectPattern.m_Color.G / 255.0, self.m_ObjectPattern.m_Color.B / 255.0,1.0)
 
-                    time.sleep(self.m_ObjectPattern.m_lSimulationInterval/1000)
-                
                 if self.m_objManager.m_b3DMode == False:
                     x=0
                     y=0
