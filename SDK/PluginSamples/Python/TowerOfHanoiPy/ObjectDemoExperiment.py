@@ -1,0 +1,698 @@
+
+import math
+from dicttoxml import dicttoxml
+import xmltodict
+from Constants import *
+import win32ui
+import win32gui
+from EurekaSimLib import *
+import random
+import time
+from enum import IntEnum
+import numpy  as np
+import array
+from comtypes import *
+from comtypes import _safearray,safearray
+from comtypes.automation import VT_R8
+from win32com.client import VARIANT
+import pythoncom
+
+
+class EAxisPos(IntEnum):
+    LeftAxis = 0
+    BottomAxis=1
+    RightAxis=2
+    TopAxis=3
+
+class Colour:
+    def __init__(self,red=0,green=0,blue=0):
+        self.R=red
+        self.G=green
+        self.B=blue
+
+    def setRGB(self,red=0,green=0,blue=0):
+        self.R=red
+        self.G=green
+        self.B=blue
+
+    def toRGB(self,iColor):
+        hexColor = '%08x' % iColor
+        self.R=int(hexColor[0:2],16)
+        self.G=int(hexColor[2:4],16)
+        self.B=int(hexColor[4:6],16)
+
+    def toInt(self):
+        colourHex = '00%02x%02x%02x' % (self.B,self.G,self.R)
+        icolour = int(colourHex,16)
+        return icolour
+    @staticmethod
+    def fromInt(iColor):
+        hexColor = '%08x' % iColor
+        blue=int(hexColor[2:4],16)
+        green=int(hexColor[4:6],16)
+        red=int(hexColor[6:8],16)
+        return Colour(red,green,blue)
+
+
+class ExperimentInfo():
+
+    def __init__(self):
+        self.RootText =""
+        self.ExperimentGroup =""
+        self.ExperimentName =""
+        self.ExperimentType=""
+        self.ObjectType =""
+        self.Colour =0
+        self.SimulationPattern =""
+        self.SimulationInterval =0
+        self.NumberOfRings = 3
+        self.AnimationSpeed = 1.0
+
+
+    def Serilize(self):
+        dicForm = vars(self)
+        xml = dicttoxml(dicForm, attr_type=False, custom_root='ExperimentInfo')
+        return xml
+    def Deserilize(self,strXML):
+        doc = xmltodict.parse(strXML)
+        infoDic = doc['ExperimentInfo']
+        for k, v in infoDic.items():
+            setattr(self, k, v)
+
+class PhysicsExperiments:
+    def __init__(self):
+        self.m_Color = Colour(0, 0, 255)
+        self.m_lSimulationInterval = 100
+        self.m_Length=1.0
+        self.m_BobRadius=0.1
+        self.m_MaxAngle = 45
+
+    def OnPropertyChanged(self,GroupName,PropertyName,PropertyValue):
+        if GroupName != PENDULUM_PROPERTIES_TITLE:
+            return
+        elif PropertyName == PENDULUM_LENGTH:
+            self.m_Length = float(PropertyValue)
+        elif PropertyName ==PENDULUM_BOB_RADIUS:
+            self.m_BobRadius=float(PropertyValue)
+        elif PropertyName == PENDULUM_COLOR_TITLE:
+            self.m_Color = Colour.fromInt(int(PropertyValue,10))
+        elif PropertyName == PENDULUM_MAX_SWING_ANGLE:
+            self.m_MaxAngle = int(PropertyValue,10)
+        else:
+            pass
+
+
+class ObjectPattern:
+    def __init__(self):
+        self.m_strObjectType = "Cube"
+        self.m_Color = Colour(0, 0, 255)
+        self.m_strSimulationPattern = "Rotate"
+        self.m_lSimulationInterval = 100
+        self.m_nNumberOfRings = 3
+        self.m_dAnimationSpeed = 1.0
+
+
+    def Serialize(self):
+        info = ExperimentInfo()
+        info.ObjectType = self.m_strObjectType
+        info.Colour = self.m_Color.toInt()
+        info.SimulationPattern = self.m_strSimulationPattern
+        info.SimulationInterval = self.m_lSimulationInterval
+        info.NumberOfRings = self.m_nNumberOfRings
+        info.AnimationSpeed = self.m_dAnimationSpeed
+        return info
+
+    def DeSerialize(self,info):
+        self.m_strObjectType= info.ObjectType
+        try:
+            self.m_Color = Colour.fromInt(int(info.Colour))
+            self.m_nNumberOfRings = int(info.NumberOfRings)
+            self.m_dAnimationSpeed = float(info.AnimationSpeed)
+        except Exception as e:
+            win32ui.MessageBox(str(e))
+        self.m_strSimulationPattern = info.SimulationPattern
+        self.m_lSimulationInterval= int(info.SimulationInterval,10)
+
+    def OnPropertyChanged(self,GroupName,PropertyName,PropertyValue):
+        if GroupName == OBJECT_PROPERTIES_TITLE:
+            if PropertyName == OBJECT_TYPE_TITLE:
+                self.m_strObjectType = PropertyValue
+            elif PropertyName == OBJECT_COLOR_TITLE:
+                self.m_Color = Colour.fromInt(int(PropertyValue,10))
+            elif PropertyName == OBJECT_SIMULATION_PATTERN_TITLE:
+                self.m_strSimulationPattern = PropertyValue
+            elif PropertyName == OBJECT_SIMULATION_INTERVAL_TITLE:
+                self.m_lSimulationInterval = int(PropertyValue,10)
+        elif GroupName == TOWEROFHANOI_PROPERTIES_TITLE:
+            if PropertyName == TOWEROFHANOI_RINGS_TITLE:
+                rings = int(PropertyValue)
+                if rings >= 3 and rings <= 8:
+                    self.m_nNumberOfRings = rings
+            elif PropertyName == TOWEROFHANOI_SPEED_TITLE:
+                self.m_dAnimationSpeed = float(PropertyValue)
+            elif PropertyName == OBJECT_COLOR_TITLE:
+                self.m_Color = Colour.fromInt(int(PropertyValue,10))
+
+
+class GraphPoints():
+
+    def __init__(self):
+        self.m_Angle = 0.0
+        self.m_x = 0.0
+        self.m_y = 0.0
+        self.m_z = 0.0
+
+class ObjectDemoExperiment():
+
+    def __init__(self,objManager):
+        self.m_PlotInfoArray=[]
+        self.m_ObjectPattern=ObjectPattern()
+        self.m_objManager=objManager
+        self.m_objPhysicExp =PhysicsExperiments()
+        self.m_inc=1.0
+        self.m_Angle=135
+        self.m_PendulumAngle=0
+        # Tower of Hanoi state
+        self.m_pegs = []
+        self.m_moves = []
+
+
+    def LoadAllExperiments(self):
+        SessionID = self.m_objManager.m_objAddin.m_lSessionID
+        objExperimentTreeView = ExperimentTreeView()
+        try:
+            objExperimentTreeView.DeleteAllExperiments(SessionID)
+            objExperimentTreeView.SetRootNodeName(PY_SAMPLE_EXPERIMENT_TYPE_GROUP_1_PROPERTIES, 1)
+            objExperimentTreeView.AddExperiment(SessionID, OBJECT_3D_TREE_ROOT_TITLE, OBJECT_3D_TREE_LEAF_PATTERN_TITLE)
+            objExperimentTreeView.AddExperiment(SessionID, OBJECT_3D_TREE_ROOT_TITLE, OBJECT_TYPE_TOWEROFHANOI)
+            objExperimentTreeView.Refresh()
+        except Exception as ex:
+            win32ui.MessageBox(ex)
+
+    def OnTreeNodeSelect(self,ExperimentGroup,ExperimentName):
+        try:
+            self.OnReloadExperiment(ExperimentGroup, ExperimentName)
+        except Exception as ex:
+            win32ui.MessageBox(ex)
+
+    def OnTreeNodeDblClick(self,ExperimentGroup,ExperimentName):
+        try:
+            self.m_ObjectPattern.m_strObjectType = ExperimentName
+            if ExperimentGroup == OBJECT_3D_TREE_ROOT_TITLE:
+                self.ShowObjectProperties()
+            else:
+                self.m_objManager.ResetPropertyGrid()
+        except Exception as ex:
+            win32ui.MessageBox(ex)
+   
+    def OnReloadExperiment(self,ExperimentGroup,ExperimentName):
+        try:
+            if self.m_objManager.m_bSimulationActive:
+                self.m_objManager.SetSimulationStatus(False)
+
+            if ExperimentGroup == OBJECT_3D_TREE_ROOT_TITLE:
+                self.m_ObjectPattern.m_strObjectType = ExperimentName
+                if self.m_ObjectPattern.m_strObjectType == OBJECT_TYPE_TOWEROFHANOI:
+                    self.ShowObjectProperties()
+                self.DrawObject(ExperimentName)
+            else:
+                pass
+        except Exception as ex:
+            win32ui.MessageBox(ex)
+
+    def ShowObjectProperties(self):
+        objPropertyWindow = PropertyWindow()
+        strGroupName = ""
+        try:
+            objPropertyWindow.RemoveAll()
+
+            if self.m_ObjectPattern.m_strObjectType == OBJECT_TYPE_TOWEROFHANOI:
+                strGroupName = TOWEROFHANOI_PROPERTIES_TITLE
+                objPropertyWindow.AddPropertyGroup(strGroupName)
+
+                strRings = str(self.m_ObjectPattern.m_nNumberOfRings)
+                objPropertyWindow.AddPropertyItemAsString(strGroupName, TOWEROFHANOI_RINGS_TITLE, strRings, "Number of rings on the starting peg (3-8)")
+                
+                strSpeed = "{:.2f}".format(self.m_ObjectPattern.m_dAnimationSpeed)
+                objPropertyWindow.AddPropertyItemsAsString(strGroupName, TOWEROFHANOI_SPEED_TITLE, TOWEROFHANOI_SPEED_OPTIONS, strSpeed, "Select the animation speed multiplier.", False)
+
+            else:
+                strGroupName = OBJECT_PROPERTIES_TITLE
+                objPropertyWindow.AddPropertyGroup(strGroupName)
+                objPropertyWindow.AddPropertyItemsAsString(strGroupName, OBJECT_TYPE_TITLE, OBJECT_TYPES, self.m_ObjectPattern.m_strObjectType, "Select the Object from the List",False)
+                objPropertyWindow.AddPropertyItemsAsString(strGroupName, OBJECT_SIMULATION_PATTERN_TITLE,OBJECT_PATTERN_TYPES, self.m_ObjectPattern.m_strSimulationPattern, "Select the Simulation Pattern", False)
+                strInterval= str(self.m_ObjectPattern.m_lSimulationInterval)
+                objPropertyWindow.AddPropertyItemAsString(strGroupName,OBJECT_SIMULATION_INTERVAL_TITLE, strInterval, "Simulation Interval In Milli Seconds")
+
+            objPropertyWindow.AddColorPropertyItem(strGroupName, OBJECT_COLOR_TITLE,self.m_ObjectPattern.m_Color.toInt(), "Select the Color")
+
+            objPropertyWindow.EnableHeaderCtrl(False)
+            objPropertyWindow.EnableDescriptionArea(True)
+            objPropertyWindow.SetVSDotNetLook(True)
+            objPropertyWindow.MarkModifiedProperties(True, True)
+        except Exception as ex:
+            win32ui.MessageBox(ex)
+    
+    def Serialize(self):
+        try:
+            return self.m_ObjectPattern.Serialize()
+        except Exception as ex:
+            win32ui.MessageBox(ex)
+            return ExperimentInfo()
+       
+
+    def DeSerialize(self,info):
+        try:
+            return self.m_ObjectPattern.DeSerialize(info)
+        except Exception as ex:
+            win32ui.MessageBox(ex)
+
+    def OnPropertyChanged(self,GroupName, PropertyName,PropertyValue):
+        try:
+            if self.m_objManager.m_bSimulationActive:
+                self.m_objManager.SetSimulationStatus(False)
+
+            if GroupName == OBJECT_PROPERTIES_TITLE or GroupName == TOWEROFHANOI_PROPERTIES_TITLE:
+                self.m_ObjectPattern.OnPropertyChanged(GroupName, PropertyName, PropertyValue)
+            elif GroupName==PENDULUM_PROPERTIES_TITLE:
+                self.m_objPhysicExp.OnPropertyChanged(GroupName, PropertyName, PropertyValue)
+               
+            self.DrawScene()
+        except Exception as ex:
+            win32ui.MessageBox(ex)
+
+    def DrawScene(self):
+        try:
+            self.OnReloadExperiment(self.m_objManager.m_strExperimentGroup, self.m_objManager.m_strExperimentName)
+        except Exception as ex:
+            win32ui.MessageBox(ex)
+
+    def DrawObject(self,ExperimentName):
+        try:
+            if self.m_ObjectPattern.m_strObjectType == OBJECT_TYPE_CUBE:
+                self.DrawCube()
+            elif self.m_ObjectPattern.m_strObjectType == OBJECT_TYPE_BALL:
+                self.DrawBall()
+            elif self.m_ObjectPattern.m_strObjectType == OBJECT_TYPE_PYRAMID:
+                self.DrawPyramid()
+            elif self.m_ObjectPattern.m_strObjectType == OBJECT_TYPE_AEROPLANE:
+                self.DrawAeroplane()
+            elif self.m_ObjectPattern.m_strObjectType == OBJECT_TYPE_TOWEROFHANOI:
+                self.InitializePegs()
+                self.DrawTowerOfHanoi()
+        except Exception as ex:
+            win32ui.MessageBox(ex)
+
+    def DrawCylinder(self, pView, radius, height, slices):
+        if not pView: return
+        pi = 3.1415926535
+        angle_step = 2.0 * pi / slices
+
+        # Draw the wall
+        pView.glBegin(GL_QUAD_STRIP)
+        for i in range(slices + 1):
+            angle = i * angle_step
+            x = radius * math.cos(angle)
+            z = radius * math.sin(angle)
+            pView.glNormal3f(x / radius, 0.0, z / radius)
+            pView.glVertex3f(x, height / 2.0, z)
+            pView.glVertex3f(x, -height / 2.0, z)
+        pView.glEnd()
+
+        # Draw the top cap
+        pView.glBegin(GL_TRIANGLE_FAN)
+        pView.glNormal3f(0.0, 1.0, 0.0)
+        pView.glVertex3f(0.0, height / 2.0, 0.0)
+        for i in range(slices + 1):
+            angle = i * angle_step
+            pView.glVertex3f(radius * math.cos(angle), height / 2.0, radius * math.sin(angle))
+        pView.glEnd()
+
+        # Draw the bottom cap
+        pView.glBegin(GL_TRIANGLE_FAN)
+        pView.glNormal3f(0.0, -1.0, 0.0)
+        pView.glVertex3f(0.0, -height / 2.0, 0.0)
+        for i in range(slices, -1, -1):
+            angle = i * angle_step
+            pView.glVertex3f(radius * math.cos(angle), -height / 2.0, radius * math.sin(angle))
+        pView.glEnd()
+
+    def DrawRing(self, pView, innerRadius, outerRadius, height, slices):
+        if not pView: return
+        pi = 3.1415926535
+        angle_step = 2.0 * pi / slices
+
+        # Outer wall
+        pView.glBegin(GL_QUAD_STRIP)
+        for i in range(slices + 1):
+            angle = i * angle_step
+            x = outerRadius * math.cos(angle)
+            z = outerRadius * math.sin(angle)
+            pView.glNormal3f(x / outerRadius, 0.0, z / outerRadius)
+            pView.glVertex3f(x, height / 2.0, z)
+            pView.glVertex3f(x, -height / 2.0, z)
+        pView.glEnd()
+
+        # Inner wall
+        pView.glBegin(GL_QUAD_STRIP)
+        for i in range(slices + 1):
+            angle = i * angle_step
+            x = innerRadius * math.cos(angle)
+            z = innerRadius * math.sin(angle)
+            pView.glNormal3f(-x / innerRadius, 0.0, -z / innerRadius)
+            pView.glVertex3f(x, -height / 2.0, z)
+            pView.glVertex3f(x, height / 2.0, z)
+        pView.glEnd()
+
+        # Top cap
+        pView.glBegin(GL_QUAD_STRIP)
+        pView.glNormal3f(0.0, 1.0, 0.0)
+        for i in range(slices + 1):
+            angle = i * angle_step
+            pView.glVertex3f(outerRadius * math.cos(angle), height / 2.0, outerRadius * math.sin(angle))
+            pView.glVertex3f(innerRadius * math.cos(angle), height / 2.0, innerRadius * math.sin(angle))
+        pView.glEnd()
+
+        # Bottom cap
+        pView.glBegin(GL_QUAD_STRIP)
+        pView.glNormal3f(0.0, -1.0, 0.0)
+        for i in range(slices + 1):
+            angle = i * angle_step
+            pView.glVertex3f(innerRadius * math.cos(angle), -height / 2.0, innerRadius * math.sin(angle))
+            pView.glVertex3f(outerRadius * math.cos(angle), -height / 2.0, outerRadius * math.sin(angle))
+        pView.glEnd()
+
+    def InitializePegs(self):
+        self.m_pegs = [[] for _ in range(3)]
+        for i in range(self.m_ObjectPattern.m_nNumberOfRings, 0, -1):
+            self.m_pegs[0].append(i)
+
+    def TowerOfHanoiSolver(self, n, from_peg, to_peg, aux_peg):
+        if n == 0:
+            return
+        self.TowerOfHanoiSolver(n - 1, from_peg, aux_peg, to_peg)
+        self.m_moves.append({'from': from_peg, 'to': to_peg})
+        self.TowerOfHanoiSolver(n - 1, aux_peg, to_peg, from_peg)
+
+    def DrawTowerOfHanoi(self, movingDisk=-1, mx=0, my=0, mz=0):
+        applicationView = ApplicationView()
+        applicationView.InitializeEnvironment(True)
+        applicationView.BeginGraphicsCommands()
+
+        color = self.m_ObjectPattern.m_Color
+        applicationView.SetBkgColor(color.R / 255.0, color.G / 255.0, color.B / 255.0, 1.0)
+        
+        applicationView.StartNewDisplayList()
+
+        openGLView = OpenGLView()
+
+        # Model Parameters
+        baseWidth, baseHeight, pegHeight, pegRadius = 2.5, 0.1, 1.0, 0.02
+        pegSpacing, diskThickness = 0.8, 0.08
+        maxDiskRadius, minDiskRadius = 0.35, 0.1
+        pegPositions = [-pegSpacing, 0.0, pegSpacing]
+        diskHoleRadius = pegRadius + 0.02
+
+        # Draw Base
+        openGLView.glPushMatrix()
+        openGLView.glTranslatef(0.0, -pegHeight / 2.0 - baseHeight / 2.0, 0.0)
+        openGLView.glColor3f(0.4, 0.2, 0.1)
+        self.DrawCylinder(openGLView, baseWidth / 2.0, baseHeight, 32)
+        openGLView.glPopMatrix()
+
+        # Draw Pegs
+        for pos in pegPositions:
+            openGLView.glPushMatrix()
+            openGLView.glTranslatef(pos, 0.0, 0.0)
+            openGLView.glColor3f(0.8, 0.7, 0.6)
+            self.DrawCylinder(openGLView, pegRadius, pegHeight, 16)
+            openGLView.glPopMatrix()
+        
+        # Draw Disks
+        for i, peg in enumerate(self.m_pegs):
+            for j, diskID in enumerate(peg):
+                if diskID == movingDisk: continue
+                
+                radius = minDiskRadius + (maxDiskRadius - minDiskRadius) * (float(diskID - 1) / (self.m_ObjectPattern.m_nNumberOfRings - 1))
+                currentDiskY = -pegHeight / 2.0 + diskThickness / 2.0 + j * diskThickness
+
+                openGLView.glPushMatrix()
+                openGLView.glTranslatef(pegPositions[i], currentDiskY, 0.0)
+                
+                r = float((diskID * 37) % 256) / 255.0
+                g = float((diskID * 59) % 256) / 255.0
+                b = float((diskID * 73) % 256) / 255.0
+                openGLView.glColor3f(r, g, b)
+
+                self.DrawRing(openGLView, diskHoleRadius, radius, diskThickness, 32)
+                openGLView.glPopMatrix()
+
+        # Draw moving disk
+        if movingDisk != -1:
+            radius = minDiskRadius + (maxDiskRadius - minDiskRadius) * (float(movingDisk - 1) / (self.m_ObjectPattern.m_nNumberOfRings - 1))
+            openGLView.glPushMatrix()
+            openGLView.glTranslatef(mx, my, mz)
+
+            r = float((movingDisk * 37) % 256) / 255.0
+            g = float((movingDisk * 59) % 256) / 255.0
+            b = float((movingDisk * 73) % 256) / 255.0
+            openGLView.glColor3f(r, g, b)
+
+            self.DrawRing(openGLView, diskHoleRadius, radius, diskThickness, 32)
+            openGLView.glPopMatrix()
+
+        applicationView.EndNewDisplayList()
+        applicationView.EndGraphicsCommands()
+        applicationView.Refresh()
+
+    def AnimateMove(self, fromPeg, toPeg):
+        if fromPeg < 0 or fromPeg >= len(self.m_pegs) or not self.m_pegs[fromPeg]: return
+
+        diskID = self.m_pegs[fromPeg][-1]
+
+        baseDuration = 0.025 # seconds, Reduced from 0.5 to 0.025 for 20x speed up
+        animationDuration = baseDuration / self.m_ObjectPattern.m_dAnimationSpeed
+        if animationDuration < 0.01: animationDuration = 0.01
+
+        liftHeight = 0.8
+        pegHeight = 1.0
+        pegSpacing = 0.8
+        diskThickness = 0.08
+        pegPositions = [-pegSpacing, 0.0, pegSpacing]
+
+        startX = pegPositions[fromPeg]
+        startY = -pegHeight / 2.0 + diskThickness / 2.0 + (len(self.m_pegs[fromPeg]) - 1) * diskThickness
+        
+        endX = pegPositions[toPeg]
+        endY = -pegHeight / 2.0 + diskThickness / 2.0 + len(self.m_pegs[toPeg]) * diskThickness
+
+        # Pop disk logically
+        self.m_pegs[fromPeg].pop()
+
+        def check_stop():
+            win32gui.PumpWaitingMessages()
+            return not self.m_objManager.m_bSimulationActive
+        
+        # 1. Lift disk
+        startTime = time.perf_counter()
+        progress = 0
+        while progress < 1.0:
+            if check_stop(): self.m_pegs[fromPeg].append(diskID); return
+            elapsed = time.perf_counter() - startTime
+            progress = min(elapsed / animationDuration, 1.0)
+            currentY = startY + (liftHeight - startY) * progress
+            self.DrawTowerOfHanoi(diskID, startX, currentY, 0.0)
+
+        # 2. Move disk across
+        startTime = time.perf_counter()
+        progress = 0
+        while progress < 1.0:
+            if check_stop(): self.m_pegs[fromPeg].append(diskID); return
+            elapsed = time.perf_counter() - startTime
+            progress = min(elapsed / animationDuration, 1.0)
+            currentX = startX + (endX - startX) * progress
+            self.DrawTowerOfHanoi(diskID, currentX, liftHeight, 0.0)
+
+        # 3. Lower disk down
+        startTime = time.perf_counter()
+        progress = 0
+        while progress < 1.0:
+            if check_stop(): self.m_pegs[fromPeg].append(diskID); return
+            elapsed = time.perf_counter() - startTime
+            progress = min(elapsed / animationDuration, 1.0)
+            currentY = liftHeight + (endY - liftHeight) * progress
+            self.DrawTowerOfHanoi(diskID, endX, currentY, 0.0)
+
+        # Push disk logically
+        self.m_pegs[toPeg].append(diskID)
+        self.DrawTowerOfHanoi() # Final draw
+
+    def StartTowerOfHanoiSimulation(self):
+        self.m_objManager.SetSimulationStatus(True)
+        self.m_objManager.SetStatusBarMessage("Simulation Started...", True)
+        
+        self.InitializePegs()
+        self.m_moves.clear()
+        self.TowerOfHanoiSolver(self.m_ObjectPattern.m_nNumberOfRings, 0, 2, 1)
+
+        for move in self.m_moves:
+            win32gui.PumpWaitingMessages()
+            if not self.m_objManager.m_bSimulationActive:
+                break
+            self.AnimateMove(move['from'], move['to'])
+        
+        if self.m_objManager.m_bSimulationActive:
+            self.m_objManager.SetSimulationStatus(False)
+            self.m_objManager.SetStatusBarMessage("Simulation Finished.", True)
+        
+        # Reset board visually for clarity
+        self.InitializePegs()
+        self.DrawTowerOfHanoi()
+
+    def StartSimulation(self,ExperimentGroup,ExperimentName):
+        if self.m_ObjectPattern.m_strObjectType == OBJECT_TYPE_TOWEROFHANOI:
+            self.StartTowerOfHanoiSimulation()
+        elif ExperimentGroup == OBJECT_3D_TREE_ROOT_TITLE and ExperimentName == OBJECT_3D_TREE_LEAF_PATTERN_TITLE:
+            try:
+                self.StartObjectSimulation()
+            except Exception as ex:
+                 win32ui.MessageBox(ex)
+        elif ExperimentGroup == MECHANICS_TREE_ROOT_TITLE and ExperimentName == MECHANICS_TREE_SIMPLE_PENDULUM_TITLE:
+            try:
+                self.StimulatePendulum()
+            except Exception as ex:
+                 win32ui.MessageBox(ex)
+        else:
+            pass
+
+    def StartObjectSimulation(self):
+            self.m_objManager.SetSimulationStatus(True)
+            applicationView = ApplicationView()
+            Angle = 0.0
+            x = 0.0
+            y = 0.0 
+            z = 0.0
+            i = 0 #Indicate Random Movment after each iteration
+            while self.m_objManager.m_bSimulationActive:
+                applicationView.BeginGraphicsCommands()
+                if self.m_ObjectPattern.m_strSimulationPattern == OBJECT_PATTERN_TYPE_ROTATE:
+                    x = 0.1
+                    y = 1.0
+                    z = 0.1
+                elif self.m_ObjectPattern.m_strSimulationPattern == OBJECT_PATTERN_TYPE_RANDOM:
+                    if i==0:
+                        x = 1.0
+                        y = 0.1
+                        z = 0.1
+                    elif i==1:
+                        x = 0.1
+                        y = 1.0
+                        z = 0.1
+                    elif i==2:
+                        x = 0.1
+                        y = 0.1
+                        z = 1.0
+                    i=random.randint(0,2)
+                if self.m_objManager.m_b3DMode == False:
+                    x=0
+                    y=0
+                applicationView.RotateObject(Angle, x, y, z)
+                applicationView.EndGraphicsCommands()
+                applicationView.Refresh()
+                #Process the Results
+                self.OnNextSimulationPoint(Angle, x, y, z)
+                Angle = Angle + 5
+                if  Angle > 360:
+                    self.m_PlotInfoArray.clear()
+                    Angle = 0
+                #time.sleep(self.m_ObjectPattern.m_lSimulationInterval/1000)
+
+    def OnNextSimulationPoint(self,Angle,x,y, z):
+        strStatus ="Simulation Points (Angle:{0},X:{1},Y:{2},Z:{3})\n".format(Angle, x, y, z)
+                                            
+        if self.m_objManager.m_bShowExperimentalParamaters:
+            self.m_objManager.AddOperationStatus(strStatus)
+
+        if self.m_objManager.m_bLogSimulationResultsToCSVFile:
+            strLog = "Simulation Points (Angle:{0},X:{1},Y:{2},Z:{3})\n".format(Angle, x, y, z)
+            self.m_objManager.LogSimulationPoint(strLog)
+
+        if self.m_objManager.m_bDisplayRealTimeGraph:
+            self.PlotSimulationPoint(Angle, x, y, z)
+    
+    def PlotSimulationPoint(self,Angle,x,y,z):
+            Point = GraphPoints()
+            Point.m_Angle = Angle
+            Point.m_x = x
+            Point.m_y = y
+            Point.m_z = z
+            self.m_PlotInfoArray.append(Point)
+            strStatus= "Plot Data Points Count ={0}" .format (len(self.m_PlotInfoArray))
+            self.m_objManager.SetStatusBarMessage(strStatus)
+            self.DisplayObjectDemoGraph()
+
+    def InitializeSimulationGraph(self, ExperimentName):
+        
+            self.m_PlotInfoArray.clear()
+
+            applicationChart = ApplicationChart()
+            try:
+            
+                applicationChart.DeleteAllCharts()
+                applicationChart.Initialize2dChart(3)
+
+                applicationChart.Set2dGraphInfo(0, "Angle Vs X", "Angle(Degree)","X", True)
+                applicationChart.Set2dAxisRange(0, int(EAxisPos.BottomAxis), 0, 365)
+                applicationChart.Set2dAxisRange(0, int(EAxisPos.LeftAxis), 0, 2)
+
+                applicationChart.Set2dGraphInfo(1, "Angle Vs Y", "Angle(Degree)","Y",True)
+                applicationChart.Set2dAxisRange(1, int(EAxisPos.BottomAxis), 0, 365)
+                applicationChart.Set2dAxisRange(1, int(EAxisPos.LeftAxis), 0, 2)
+
+                applicationChart.Set2dGraphInfo(2, "Angle Vs Z", "Angle(Degree)","Z", True)
+                applicationChart.Set2dAxisRange(2, int(EAxisPos.BottomAxis), 0, 365)
+                applicationChart.Set2dAxisRange(2, int(EAxisPos.LeftAxis), 0, 2)
+
+                applicationChart.ResizeChartWindow()
+            
+            except:
+                    pass
+
+    def DisplayObjectDemoGraph(self):
+        try:
+            iArraySize = len(self.m_PlotInfoArray)
+            if iArraySize <2 or iArraySize % 10 == 0:
+                return
+            sabX=[[1.0,1.0,1.0] for i in range(0,iArraySize)]
+            sabY=[[1.0,1.0,1.0] for i in range(0,iArraySize)]
+            sabZ=[[1.0,1.0,1.0] for i in range(0,iArraySize)]
+
+            for i in range(iArraySize):
+                try:
+                    info=self.m_PlotInfoArray[i]
+                    val=info.m_Angle
+                    sabX[i][1]=val
+                    sabY[i][1]=val
+                    sabZ[i][1]=val
+
+                    val=info.m_x
+                    sabX[i][2]=val
+                    val=info.m_y
+                    sabY[i][2]=val
+                    val=info.m_z
+                    sabZ[i][2]=val
+                except  Exception as e:
+                    win32ui.MessageBox(str(e))
+
+            saX=VARIANT(pythoncom.VT_ARRAY | pythoncom.VT_R8,sabX)
+            saY=VARIANT(pythoncom.VT_ARRAY | pythoncom.VT_R8,sabY)
+            saZ=VARIANT(pythoncom.VT_ARRAY | pythoncom.VT_R8,sabZ)
+            
+            if iArraySize % 5 == 0:
+                applicationChart = ApplicationChart()
+                applicationChart.Set2dChartData(0, saX)
+                applicationChart.Set2dChartData(1, saY)
+                applicationChart.Set2dChartData(2, saZ)
+            
+        except Exception as e:
+            win32ui.MessageBox(str(e))

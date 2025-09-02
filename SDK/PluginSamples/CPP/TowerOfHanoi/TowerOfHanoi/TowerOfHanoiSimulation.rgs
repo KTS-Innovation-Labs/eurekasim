@@ -1,0 +1,26 @@
+HKCR
+{
+	TowerOfHanoiSimulation.1 = s 'TowerOfHanoiSimulation Class'
+	{
+		CLSID = s '{d8a5bb51-5b4a-417c-86ca-055f4809fd7e}'
+	}
+	TowerOfHanoiSimulation = s 'TowerOfHanoiSimulation Class'
+	{		
+		CurVer = s 'TowerOfHanoiSimulation.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {d8a5bb51-5b4a-417c-86ca-055f4809fd7e} = s 'TowerOfHanoiSimulation Class'
+		{
+			ProgID = s 'TowerOfHanoiSimulation.1'
+			VersionIndependentProgID = s 'TowerOfHanoiSimulation'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			TypeLib = s '{9EB5244B-E488-42D0-AF91-6CE7DB618FD1}'
+			Version = s '1.0'
+		}
+	}
+}
