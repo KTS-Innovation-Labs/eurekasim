@@ -1,0 +1,37 @@
+// EmWave.idl : IDL source for EmWave
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (EmWave.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(CF2C8CEE-F445-4F90-99D2-1277679D8597),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IEmWaveSimulation : IDispatch{
+	[id(1)] HRESULT InvokePreferenceSettings();
+	[id(2)] HRESULT InvokeDefaultSettings();
+	[id(3)] HRESULT InvokeOnExperimentChanged();
+};
+[
+	uuid(9EB5244B-E488-42D0-AF91-6CE7DB618FD1),
+	version(1.0),
+]
+library EmWaveLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(EB46B87E-21C7-49A6-B6A4-17D6F3D89D7E)		
+	]
+	coclass EmWaveSimulation
+	{
+		[default] interface IEmWaveSimulation;
+	};
+};
+

@@ -1,0 +1,26 @@
+HKCR
+{
+	EmWaveSimulation.1 = s 'EmWaveSimulation Class'
+	{
+		CLSID = s '{EB46B87E-21C7-49A6-B6A4-17D6F3D89D7E}'
+	}
+	EmWaveSimulation = s 'EmWaveSimulation Class'
+	{		
+		CurVer = s 'EmWaveSimulation.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {EB46B87E-21C7-49A6-B6A4-17D6F3D89D7E} = s 'EmWaveSimulation Class'
+		{
+			ProgID = s 'EmWaveSimulation.1'
+			VersionIndependentProgID = s 'EmWaveSimulation'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			TypeLib = s '{9EB5244B-E488-42D0-AF91-6CE7DB618FD1}'
+			Version = s '1.0'
+		}
+	}
+}
