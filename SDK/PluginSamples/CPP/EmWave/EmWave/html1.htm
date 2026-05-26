@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" label="EmWave Addin">
+    <ribbon>
+        <tabs>
+            <tab id="PS.Home" label="Home">
+                <group id="PS.Tab.Group.Preference.Settings.1" label="Preference Settings">
+                    <button label="Preference" onAction="InvokePreferenceSettings" image="0" />
+                </group>
+            </tab>
+            <tab id="Cpp.Sample.Setup" label="EmWave Setup" insertAfterQ="Basic Setup">
+                <group id="PS.Tab.Group.Default.Settings.1" label="Default Settings">
+                    <button label="Experiment Settings" onAction="InvokeDefaultSettings" image="1" />
+                </group>
+            </tab>
+        </tabs>
+    </ribbon>
+</customUI>
