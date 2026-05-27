@@ -1,0 +1,26 @@
+HKCR
+{
+	GameDemoSimulation.1 = s 'GameDemoSimulation Class'
+	{
+		CLSID = s '{aaf1b6e9-178e-4645-8e6d-78c1cb2cdacb}'
+	}
+	GameDemoSimulation = s 'GameDemoSimulation Class'
+	{		
+		CurVer = s 'GameDemoSimulation.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {aaf1b6e9-178e-4645-8e6d-78c1cb2cdacb} = s 'GameDemoSimulation Class'
+		{
+			ProgID = s 'GameDemoSimulation.1'
+			VersionIndependentProgID = s 'GameDemoSimulation'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			TypeLib = s '{9EB5244B-E488-42D0-AF91-6CE7DB618FD1}'
+			Version = s '1.0'
+		}
+	}
+}
