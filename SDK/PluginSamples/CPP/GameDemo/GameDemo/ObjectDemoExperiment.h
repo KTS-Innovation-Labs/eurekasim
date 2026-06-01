@@ -1,4 +1,9 @@
-#pragma once
+﻿#pragma once
+
+#include <GL/gl.h>
+#include <atlcomcli.h>  
+#include <GL/gl.h>
+
 
 /* BeginMode */
 #define GL_POINTS                         0x0000
@@ -12,40 +17,47 @@
 #define GL_QUAD_STRIP                     0x0008
 #define GL_POLYGON                        0x0009
 
-#define OBJECT_3D_TREE_ROOT_TITLE					_T("3D Object Demo")
-#define OBJECT_3D_TREE_LEAF_PATTERN_TITLE			_T("Object Pattern Demo")
+#define OBJECT_3D_TREE_ROOT_TITLE                  _T("3D Object Demo")
+#define OBJECT_3D_TREE_LEAF_PATTERN_TITLE          _T("Object Pattern Demo")
 
-#define MECHANICS_TREE_ROOT_TITLE					_T("Physics")
-#define MECHANICS_TREE_SIMPLE_PENDULUM_TITLE		_T("Simple Pendulum")
-#define MECHANICS_TREE_PROJECTILE_MOTION_TITLE		_T("Projectile Motion")
-#define MECHANICS_TREE_PLANETORY_MOTION_TITLE		_T("Planetory Motion")
+#define MECHANICS_TREE_ROOT_TITLE                  _T("Physics")
+#define MECHANICS_TREE_SIMPLE_PENDULUM_TITLE       _T("Simple Pendulum")
+#define MECHANICS_TREE_PROJECTILE_MOTION_TITLE     _T("Projectile Motion")
+#define MECHANICS_TREE_PLANETORY_MOTION_TITLE      _T("Planetory Motion")
 
-#define OBJECT_PROPERTIES_TITLE						_T("Select Object | Properties")
-#define OBJECT_TYPE_TITLE							_T("Select The Object Type")
-#define OBJECT_COLOR_TITLE							_T("Select Background Color")
-#define OBJECT_SIMULATION_PATTERN_TITLE				_T("Simulation Pattern")
-#define OBJECT_SIMULATION_INTERVAL_TITLE			_T("Simulation Interval")
+#define OBJECT_PROPERTIES_TITLE                    _T("Select Object | Properties")
+#define OBJECT_TYPE_TITLE                          _T("Select The Object Type")
+#define OBJECT_COLOR_TITLE                         _T("Select Background Color")
+#define OBJECT_SIMULATION_PATTERN_TITLE            _T("Simulation Pattern")
+#define OBJECT_SIMULATION_INTERVAL_TITLE           _T("Simulation Interval")
 
-#define OBJECT_TYPES								_T("Cube,Ball,Pyramid,Aeroplane,Clock,FootballPenalty")
-#define OBJECT_TYPE_CUBE							_T("Cube")
-#define OBJECT_TYPE_BALL							_T("Ball")
-#define OBJECT_TYPE_PYRAMID							_T("Pyramid")
-#define OBJECT_TYPE_AEROPLANE						_T("Aeroplane")
-#define OBJECT_TYPE_CLOCK							_T("Clock")
-#define OBJECT_TYPE_FOOTBALLPENALTY					_T("FootballPenalty")
+#define OBJECT_TYPES                               _T("FootballPenalty,Elephant")
+#define OBJECT_TYPE_FOOTBALLPENALTY                _T("FootballPenalty")
+#define OBJECT_TYPE_ELEPHANT                       _T("Elephant")
 
-#define OBJECT_PATTERN_TYPES						_T("Rotate,Random Movement,Penalty Kick View")
-#define OBJECT_PATTERN_TYPE_ROTATE					_T("Rotate")
-#define OBJECT_PATTERN_TYPE_RANDOM					_T("Random Movement")
-#define OBJECT_PATTERN_TYPE_PENALTY_KICK			_T("Penalty Kick View")
+#define OBJECT_PATTERN_TYPES                       _T("Penalty Kick View,Elephant Animation")
+#define OBJECT_PATTERN_TYPE_ROTATE                 _T("Rotate")
+#define OBJECT_PATTERN_TYPE_PENALTY_KICK           _T("Penalty Kick View")
+#define OBJECT_PATTERN_TYPE_ELEPHANT_ANIMATION     _T("Elephant Animation")
 
-// Football Penalty Game Constants
-#define BALL_SPEED_INCREMENT                0.1f
-#define MAX_BALL_SPEED                      8.0f
-#define GOALKEEPER_SPEED                    0.015f
-#define GOALKEEPER_REACTION_TIME            0.5f
-#define BALL_GRAVITY                        0.008f
-#define KICK_POWER_MULTIPLIER               5.0f
+#define BALL_SPEED_INCREMENT               0.1f
+#define MAX_BALL_SPEED                     8.0f
+#define GOALKEEPER_SPEED                   0.015f
+#define GOALKEEPER_REACTION_TIME           0.5f
+#define BALL_GRAVITY                       0.008f
+#define KICK_POWER_MULTIPLIER              5.0f
+
+#define ELEPHANT_STATE_IDLE                    0
+#define ELEPHANT_STATE_WALKING                 1
+#define ELEPHANT_STATE_TRUMPETING              2
+#define ELEPHANT_STATE_RUNNING                 3
+#define ELEPHANT_STATE_IDLE   0
+#define ELEPHANT_STATE_WALK   1
+#define ELEPHANT_STATE_RUN    2
+#define ELEPHANT_EYE_WIDTH 0.08f
+#define ELEPHANT_EYE_HEIGHT 0.05f
+#define ELEPHANT_EYE_DEPTH 0.03f
+#define _USE_MATH_DEFINES
 
 
 // Forward declarations
@@ -55,10 +67,10 @@ class CAddinSimulationManager;
 class CObjectPattern : public CObject
 {
 public:
-	CString		m_strObjectType;
-	COLORREF	m_Color;
-	CString		m_strSimulationPattern;
-	long		m_lSimulationInterval;
+	CString     m_strObjectType;
+	COLORREF    m_Color;
+	CString     m_strSimulationPattern;
+	long        m_lSimulationInterval;
 
 	CObjectPattern();
 	virtual void Serialize(CArchive& ar);
@@ -108,12 +120,35 @@ public:
 	void Reset();
 };
 
+class CElephantGameState : public CObject
+{
+public:
+	float positionX;
+	float positionY;
+	float positionZ;
+	float rotationY;
+	float animationTime;
+	int currentState;
+	float walkSpeed;
+	float runSpeed;
+	float scale;
+	bool isTrumpeting;
+	float trumpetProgress;
+	float headBob;
+	float trunkSwing;
+	float earFlap;
+
+	CElephantGameState();
+	void Reset();
+};
+
 class CObjectDemoExperiment : public CObject
 {
 private:
-	CAddinSimulationManager*		m_pManager;
-	CObArray						m_PlotInfoArray;
+	CAddinSimulationManager*        m_pManager;
+	CObArray                        m_PlotInfoArray;
 	CFootballPenaltyGameState       m_FootballGameState;
+	CElephantGameState              m_ElephantGameState;
 
 	// Enhanced penalty kick view variables
 	bool m_bPenaltyKickView;
@@ -122,7 +157,7 @@ private:
 	bool m_bKeyboardActive;
 
 public:
-	CObjectPattern			m_ObjectPattern;
+	CObjectPattern          m_ObjectPattern;
 
 	CObjectDemoExperiment(CAddinSimulationManager* pManager);
 	virtual ~CObjectDemoExperiment();
@@ -139,18 +174,16 @@ public:
 
 	void DrawScene();
 	void DrawObject(CString ExperimentName);
-	void DrawCube();
-	void DrawBall();
-	void DrawPyramid();
-	void DrawAeroplane();
+
+	// Simulation methods
 	void StartSimulation(BSTR ExperimentGroup, BSTR ExperimentName);
 	void StartObjectSimulation();
 	void OnNextSimulationPoint(float Angle, float x, float y, float z);
 	void PlotSimulationPoint(float Angle, float x, float y, float z);
 	void InitializeSimulationGraph(CString ExperimentName);
 	void DisplayObjectDemoGraph();
-	void DrawClock();
-	void DrawCircle(float segments, float radius, float sx, float sy);
+
+	// Football Penalty methods
 	void DrawFootballPenalty();
 	void UpdateFootballPenalty();
 	void DrawFootball();
@@ -168,10 +201,35 @@ public:
 	void ProcessKick();
 	void ResetShotResult();
 	void HandleKeyboardInput();
+
+	// Penalty Kick View methods
 	void DrawPenaltyKickView();
 	void DrawPenaltyKickHUD();
 	void DrawAimingReticle();
 	void DrawResultMessage();
 	void DrawStadium();
 	void DrawNet();
+
+	// Elephant Simulator Methods
+	void DrawElephant();
+	void UpdateElephantAnimation();
+
+	// Elephant drawing parts
+	void DrawElephantBody();
+	void DrawElephantHead();
+	void DrawElephantEars();
+	void DrawElephantTrunk();
+	void DrawElephantTusks();
+	void DrawElephantLegs();
+	void DrawElephantTail();
+	void DrawRoundedCube(float size);
+	void DrawSavannahEnvironmentWithPond();
+	void DrawAcaciaTree(float x, float z);
+	void DrawGrassClump(float x, float z);
+	void DrawCloud(float x, float y, float z, float scale);
+	void DrawEllipsoid(float radius, int slices, int stacks);
+	void DrawSphere(float radius, int slices, int stacks);
+
+	void DrawCylinder(float radius, float height);
+
 };
