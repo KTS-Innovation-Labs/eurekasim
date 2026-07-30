@@ -6,7 +6,7 @@
 
 
  /* File created by MIDL compiler version 8.00.0603 */
-/* at Sat Nov 29 10:58:45 2025
+/* at Mon Apr 06 21:07:03 2026
  */
 /* Compiler settings for GameDemo.idl:
     Oicf, W1, Zp8, env=Win64 (32b run), target_arch=AMD64 8.00.0603 
