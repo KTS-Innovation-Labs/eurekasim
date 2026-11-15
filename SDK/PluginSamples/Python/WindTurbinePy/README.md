@@ -23,4 +23,4 @@ The 3D wind turbine is constructed programmatically from four main parts: a stur
 
 Watch the working Python plugin with running blade rotations in the EurekaSim application:
 
-[WindTurbinePy Simulation](YOUR_YOUTUBE_LINK_HERE)
+[WindTurbinePy Simulation](https://www.youtube.com/watch?v=Y0q0YEKmL9Q)
