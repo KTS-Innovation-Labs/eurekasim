@@ -1,0 +1,26 @@
+HKCR
+{
+	ObjectDemoSimulation.1 = s 'ObjectDemoSimulation Class'
+	{
+		CLSID = s '{40642f86-2be2-4fe6-aa24-a44ed20b7153}'
+	}
+	ObjectDemoSimulation = s 'ObjectDemoSimulation Class'
+	{		
+		CurVer = s 'ObjectDemoSimulation.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {40642f86-2be2-4fe6-aa24-a44ed20b7153} = s 'ObjectDemoSimulation Class'
+		{
+			ProgID = s 'ObjectDemoSimulation.1'
+			VersionIndependentProgID = s 'ObjectDemoSimulation'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			TypeLib = s '{9EB5244B-E488-42D0-AF91-6CE7DB618FD1}'
+			Version = s '1.0'
+		}
+	}
+}

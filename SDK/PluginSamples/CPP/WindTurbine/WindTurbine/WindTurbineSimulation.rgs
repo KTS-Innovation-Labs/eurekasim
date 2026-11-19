@@ -1,0 +1,26 @@
+HKCR
+{
+	WindTurbineSimulation.1 = s 'WindTurbineSimulation Class'
+	{
+		CLSID = s '{c23fca40-b534-4a61-8e43-62cef8e14a57}'
+	}
+	WindTurbineSimulation = s 'WindTurbineSimulation Class'
+	{		
+		CurVer = s 'WindTurbineSimulation.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {c23fca40-b534-4a61-8e43-62cef8e14a57} = s 'WindTurbineSimulation Class'
+		{
+			ProgID = s 'WindTurbineSimulation.1'
+			VersionIndependentProgID = s 'WindTurbineSimulation'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			TypeLib = s '{9EB5244B-E488-42D0-AF91-6CE7DB618FD1}'
+			Version = s '1.0'
+		}
+	}
+}
